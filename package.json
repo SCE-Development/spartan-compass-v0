@@ -9,7 +9,11 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:studio": "drizzle-kit studio --config drizzle.config.ts",
+    "db:generate": "drizzle-kit generate:pg --config drizzle.config.ts",
+    "db:migrate": "drizzle-kit push:pg --config drizzle.config.ts",
+    "db:drop": "drizzle-kit drop --config drizzle.config.ts"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
@@ -19,9 +23,11 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "autoprefixer": "^10.4.16",
+    "drizzle-kit": "^0.20.14",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.36.0-next.4",
+    "pg": "^8.11.3",
     "postcss": "^8.4.32",
     "postcss-load-config": "^5.0.2",
     "prettier": "^3.1.1",
@@ -37,7 +43,9 @@
   "type": "module",
   "dependencies": {
     "clsx": "^2.1.0",
+    "drizzle-orm": "^0.30.1",
     "lucide-svelte": "^0.353.0",
+    "postgres": "^3.4.3",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.2.0"
   }
