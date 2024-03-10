@@ -10,6 +10,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
+		"db:dev": "docker-compose -f docker-compose.dev.yml up -d",
     "db:studio": "drizzle-kit studio --config drizzle.config.ts",
     "db:generate": "drizzle-kit generate:pg --config drizzle.config.ts",
     "db:migrate": "drizzle-kit push:pg --config drizzle.config.ts",
