@@ -2,3 +2,8 @@
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+package.json
+bun.lockb
+
+# Ignore generated db files
+src/lib/db/migrations/*
