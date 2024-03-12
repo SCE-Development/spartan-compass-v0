@@ -20,6 +20,6 @@ jobs:
       - name: Build
         run: bun run build
       - name: Format
-        run: bun run format
+        run: bun x prettier --check .
       - name: Lint
         run: bun run lint
