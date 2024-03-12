@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1710211225048,
+      "tag": "0000_nebulous_mandarin",
+      "breakpoints": true
+    }
+  ]
+}
