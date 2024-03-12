@@ -3,6 +3,7 @@
 
 	interface Course {
 		id: number;
+		title: string;
 		subject: string;
 		courseNumber: number;
 	}
@@ -15,7 +16,7 @@
 	let courseNumbers = $derived(
 		courses
 			.filter((course) => course.subject === selectedSubject)
-			.map((course) => course.courseNumber)
+			.map((course) => ({ number: course.courseNumber, title: course.title }))
 	);
 
 	let selectedCourseId = $derived(
@@ -44,8 +45,8 @@
 
 	<select bind:value={selectedCourseNumber} class="select" disabled={!selectedSubject}>
 		<option value="">Select a course number</option>
-		{#each courseNumbers as courseNumber}
-			<option value={courseNumber}>{courseNumber}</option>
+		{#each courseNumbers as { number, title }}
+			<option value={number}>{number} - {title}</option>
 		{/each}
 	</select>
 

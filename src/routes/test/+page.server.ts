@@ -6,6 +6,7 @@ export const load = async () => {
 	const result = await db
 		.select({
 			id: coursesTable.id,
+			title: coursesTable.title,
 			subject: coursesTable.subject,
 			courseNumber: coursesTable.courseNumber,
 			description: coursesTable.description
