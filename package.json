@@ -25,7 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "autoprefixer": "^10.4.16",
-    "daisyui": "latest",
+    "daisyui": "^4.7.3",
     "drizzle-kit": "^0.20.14",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -45,11 +45,8 @@
   },
   "type": "module",
   "dependencies": {
-    "clsx": "^2.1.0",
     "drizzle-orm": "^0.30.1",
-    "lucide-svelte": "^0.353.0",
     "postgres": "^3.4.3",
-    "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.2.0"
   }
 }

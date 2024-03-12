@@ -2,4 +2,6 @@
 	import '../app.pcss';
 </script>
 
-<slot />
+<div data-theme="dracula">
+	<slot />
+</div>
