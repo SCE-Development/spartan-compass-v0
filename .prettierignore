@@ -7,3 +7,4 @@ bun.lockb
 
 # Ignore generated db files
 src/lib/db/migrations/*
+data/*
