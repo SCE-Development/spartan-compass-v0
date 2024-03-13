@@ -26,43 +26,44 @@ export async function GET(event: RequestEvent): Promise<Response> {
       }
     });
     const googleUser = await response.json();
+    console.log(googleUser.sub);
     const existingUser = await db
       .select()
       .from(userTable)
-      .where(eq(userTable.googleId, googleUser.id));
-    
-      if (existingUser) {
-        const session = await lucia.createSession(existingUser[0].id, {});
+      .where(eq(userTable.googleId, googleUser.sub));
+    console.log(existingUser)
+    if (existingUser) {
+      const session = await lucia.createSession(existingUser[0].id, {});
+      const sessionCookie = lucia.createSessionCookie(session.id);
+      event.cookies.set(sessionCookie.name, sessionCookie.value, {
+        path: ".",
+        ...sessionCookie.attributes
+      });
+    } else {
+      const userId = generateId(15);
+      await db
+        .insert(userTable)
+        .values({
+          id: userId,
+          username: googleUser.name,
+          email: googleUser.email,
+          googleId: googleUser.id,
+          createdAt: new Date()
+        });
+      
+        const session = await lucia.createSession(userId, {});
         const sessionCookie = lucia.createSessionCookie(session.id);
         event.cookies.set(sessionCookie.name, sessionCookie.value, {
           path: ".",
           ...sessionCookie.attributes
         });
-      } else {
-        const userId = generateId(15);
-        await db
-          .insert(userTable)
-          .values({
-            id: userId,
-            username: googleUser.name,
-            email: googleUser.email,
-            googleId: googleUser.id,
-            createdAt: new Date()
-          });
-        
-          const session = await lucia.createSession(userId, {});
-          const sessionCookie = lucia.createSessionCookie(session.id);
-          event.cookies.set(sessionCookie.name, sessionCookie.value, {
-            path: ".",
-            ...sessionCookie.attributes
-          });
+    }
+    return new Response("Authenticated", { 
+      status: 302,
+      headers: {
+        location: "/"
       }
-      return new Response("Authenticated", { 
-        status: 302,
-        headers: {
-          location: "/"
-        }
-      });
+    });
   } catch (e) {
     if (e instanceof OAuth2RequestError) {
       return new Response("Invalid request", { 
