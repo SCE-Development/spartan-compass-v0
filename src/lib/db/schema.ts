@@ -1,8 +1,8 @@
-import { pgTable, serial, text, integer, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 // user table for authentication using google oauth
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
+export const userTable = pgTable('users', {
+  id: text('id').primaryKey(), // lucia wants it to be string type??
   username: text('username').notNull(),
   email: text('email').notNull(),
   googleId: text('googleId').notNull(),
@@ -10,9 +10,9 @@ export const users = pgTable('users', {
 });
 
 // session table for storing user sessions
-export const sessions = pgTable('sessions', {
-  id: serial('id').primaryKey(),
-  userId: integer('userId').notNull().references(()=>users.id),
+export const sessionTable = pgTable('sessions', {
+  id: text('id').primaryKey(), // lucia wants it to be string type??
+  userId: text('userId').notNull().references(()=>userTable.id),
   expiresAt: timestamp('expiresAt', {
     withTimezone: true,
     mode: 'date'
