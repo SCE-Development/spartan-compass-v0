@@ -1,22 +1,23 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { lucia } from '$lib/server/auth';
+import { googleAuth } from '$lib/server/auth';
+import { generateState, generateCodeVerifier } from 'arctic';
+import { dev } from '$app/environment';
 
+import type { RequestEvent } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 // delete later
-export const load: PageServerLoad = async (event) => {
-	let user = null;
+export const load: PageServerLoad = async (event: RequestEvent) => {
 	if (event.locals.user) {
-		user = event.locals.user;
 		return {
-			user,
-			loggedIn: true
+			user: event.locals.user,
 		};
 	}
 };
 
 export const actions: Actions = {
-	logout: async (event) => {
+	logout: async (event: RequestEvent) => {
 		if (!event.locals.session) {
 			return fail(401);
 		}
@@ -28,7 +29,27 @@ export const actions: Actions = {
 		});
 		redirect(302, '/');
 	},
-	login: async () => {
-		return redirect(302, '/auth');
+	login: async (event) => {
+		const state = generateState();
+		const codeVerifier = generateCodeVerifier();
+		const url = await googleAuth.createAuthorizationURL(state, codeVerifier, {
+			scopes: ['profile', 'email']
+		});
+
+		event.cookies.set('google_state', state, {
+			path: '/',
+			secure: !dev,
+			httpOnly: true,
+			maxAge: 60 * 10
+		});
+	
+		event.cookies.set('code_verifier', codeVerifier, {
+			path: '/',
+			secure: !dev,
+			httpOnly: true,
+			maxAge: 60 * 10
+		});
+
+		return redirect(302, url.toString());
 	}
 };
