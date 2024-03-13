@@ -1,16 +1,15 @@
-<script lang='ts'>
-  import Login from '$lib/components/Login.svelte';
-  import Logout from '$lib/components/Logout.svelte';
+<script lang="ts">
+	import Login from '$lib/components/Login.svelte';
+	import Logout from '$lib/components/Logout.svelte';
 
-  let { data } = $props();
-  let user = $derived(data.user);
-  console.log(user);
+	let { data } = $props();
+	let user = $derived(data.user);
 </script>
 
 {#if data?.loggedIn}
-  <h1 class="text-3xl w-full flex justify-center mt-8">Logged in as {user.username}</h1>
-  <Logout />
+	<h1 class="mt-8 flex w-full justify-center text-3xl">Logged in as {user.username}</h1>
+	<Logout />
 {:else}
-  <h1 class="text-3xl w-full flex justify-center mt-8">Not logged in</h1>
-  <Login />
+	<h1 class="mt-8 flex w-full justify-center text-3xl">Not logged in</h1>
+	<Login />
 {/if}
