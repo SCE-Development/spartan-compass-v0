@@ -1,8 +1,15 @@
 <script lang='ts'>
   import Login from '$lib/components/Login.svelte';
+  import Logout from '$lib/components/Logout.svelte';
+
+  let { data } = $props();
+  let user = $derived(data.user);
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<Login />
+{#if data?.loggedIn}
+  <h1 class="text-3xl w-full flex justify-center mt-8">Logged in as {user.username}</h1>
+  <Logout />
+{:else}
+  <h1 class="text-3xl w-full flex justify-center mt-8">Not logged in</h1>
+  <Login />
+{/if}

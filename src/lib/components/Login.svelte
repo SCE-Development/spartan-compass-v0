@@ -7,6 +7,6 @@
   };
 </script>
 
-<form on:submit|preventDefault={login}>
-  <button class="btn" type="submit">Sign in</button>
+<form on:submit|preventDefault={login} class="flex justify-center m-32" use:enhance>
+  <button class="btn" type="submit">Sign in with Google</button>
 </form>
