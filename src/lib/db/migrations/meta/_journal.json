@@ -15,6 +15,27 @@
       "when": 1710325514785,
       "tag": "0001_handy_the_santerians",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710325874707,
+      "tag": "0002_pink_mandrill",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1710326053200,
+      "tag": "0003_equal_moonstone",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1710326451487,
+      "tag": "0004_shiny_rockslide",
+      "breakpoints": true
     }
   ]
 }

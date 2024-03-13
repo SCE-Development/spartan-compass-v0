@@ -26,13 +26,11 @@ export async function GET(event: RequestEvent): Promise<Response> {
       }
     });
     const googleUser = await response.json();
-    console.log(googleUser.sub);
     const existingUser = await db
       .select()
       .from(userTable)
       .where(eq(userTable.googleId, googleUser.sub));
-    console.log(existingUser)
-    if (existingUser) {
+    if (existingUser[0]) {
       const session = await lucia.createSession(existingUser[0].id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
       event.cookies.set(sessionCookie.name, sessionCookie.value, {
@@ -47,7 +45,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
           id: userId,
           username: googleUser.name,
           email: googleUser.email,
-          googleId: googleUser.id,
+          googleId: googleUser.sub,
           createdAt: new Date()
         });
       
@@ -58,6 +56,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
           ...sessionCookie.attributes
         });
     }
+    console.log("User logged in as " + googleUser.name + " (" + googleUser.email + ")");
     return new Response("Authenticated", { 
       status: 302,
       headers: {
