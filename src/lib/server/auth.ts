@@ -1,6 +1,7 @@
 import { Lucia } from 'lucia';
 import { Google } from 'arctic';
-const { DEV, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = process.env;
+import { dev } from '$app/environment';
+import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from '$env/static/private';
 import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
 
 import { db } from '$lib/db/db.server';
@@ -11,7 +12,7 @@ const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable);
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
-			secure: !DEV
+			secure: !dev
 		}
 	},
 	getUserAttributes: (attributes) => {

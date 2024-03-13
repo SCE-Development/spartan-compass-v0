@@ -6,7 +6,7 @@
 	let user = $derived(data.user);
 </script>
 
-{#if data?.loggedIn}
+{#if user}
 	<h1 class="mt-8 flex w-full justify-center text-3xl">Logged in as {user.username}</h1>
 	<Logout />
 {:else}
