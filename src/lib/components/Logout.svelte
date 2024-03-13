@@ -4,6 +4,6 @@
 
 </script>
 
-<form method="POST" class="flex justify-center m-32" use:enhance>
-  <button class="btn" type="submit">Log Out</button>
+<form method="POST" action="?/logout" use:enhance class="flex justify-center m-32">
+  <button class="btn" type="submit" name="action" value="logout">Log Out</button>
 </form>

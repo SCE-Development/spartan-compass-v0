@@ -15,7 +15,12 @@ export async function GET(event: RequestEvent): Promise<Response> {
   const storedCodeVerifier = event.cookies.get("code_verifier");
 
   if (!code || !state || !storedState || state !== storedState || !storedCodeVerifier) {
-    return new Response("Invalid request", { status: 400 });
+    return new Response("User Cancelled", {
+      status: 302,
+      headers: {
+        location: "/"
+      }
+    });
   }
 
   try {

@@ -4,6 +4,7 @@
 
   let { data } = $props();
   let user = $derived(data.user);
+  console.log(user);
 </script>
 
 {#if data?.loggedIn}
