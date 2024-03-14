@@ -1,1 +1,0 @@
-ALTER TABLE "users" ALTER COLUMN "googleId" SET DATA TYPE varchar(21);
