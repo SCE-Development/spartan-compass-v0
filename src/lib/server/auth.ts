@@ -1,7 +1,7 @@
 import { Lucia } from 'lucia';
 import { Google } from 'arctic';
 import { dev } from '$app/environment';
-import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from '$env/static/private';
+import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI } from '$env/static/private';
 import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
 
 import { db } from '$lib/db/db.server';
@@ -23,7 +23,7 @@ export const lucia = new Lucia(adapter, {
 	}
 });
 
-export const googleAuth = new Google(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+export const googleAuth = new Google(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI);
 
 declare module 'lucia' {
 	interface Register {
