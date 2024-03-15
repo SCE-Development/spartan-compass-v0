@@ -47,6 +47,7 @@
   "type": "module",
   "dependencies": {
     "@lucia-auth/adapter-drizzle": "^1.0.3",
+    "@sveltejs/adapter-node": "^5.0.1",
     "arctic": "^1.2.1",
     "drizzle-orm": "^0.30.1",
     "oslo": "^1.1.3",
