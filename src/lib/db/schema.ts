@@ -1,5 +1,32 @@
-import { pgTable, serial, text, integer, primaryKey } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
+import {
+	integer,
+	pgTable,
+	primaryKey,
+	serial,
+	text,
+	timestamp,
+	varchar
+} from 'drizzle-orm/pg-core';
+
+export const userTable = pgTable('users', {
+	id: varchar('id', { length: 15 }).primaryKey(),
+	username: text('username').notNull(),
+	email: text('email').notNull(),
+	googleId: varchar('googleId', { length: 21 }).notNull(),
+	createdAt: timestamp('createdAt').notNull()
+});
+
+export const sessionTable = pgTable('sessions', {
+	id: text('id').primaryKey(),
+	userId: varchar('userId')
+		.notNull()
+		.references(() => userTable.id),
+	expiresAt: timestamp('expiresAt', {
+		withTimezone: true,
+		mode: 'date'
+	}).notNull()
+});
 
 export const professorsTable = pgTable('professors', {
 	id: serial('id').primaryKey(),
