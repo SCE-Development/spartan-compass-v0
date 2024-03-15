@@ -31,10 +31,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 			}
 		});
 		const { name, email, sub } = await response.json();
-		const existingUser = await db
-			.select()
-			.from(userTable)
-			.where(eq(userTable.googleId, sub));
+		const existingUser = await db.select().from(userTable).where(eq(userTable.googleId, sub));
 		if (existingUser[0]) {
 			const session = await lucia.createSession(existingUser[0].id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);

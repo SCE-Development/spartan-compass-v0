@@ -11,7 +11,7 @@ import type { Actions, PageServerLoad } from './$types';
 export const load: PageServerLoad = async (event: RequestEvent) => {
 	if (event.locals.user) {
 		return {
-			user: event.locals.user,
+			user: event.locals.user
 		};
 	}
 };
@@ -42,7 +42,7 @@ export const actions: Actions = {
 			httpOnly: true,
 			maxAge: 60 * 10
 		});
-	
+
 		event.cookies.set('code_verifier', codeVerifier, {
 			path: '/',
 			secure: !dev,
