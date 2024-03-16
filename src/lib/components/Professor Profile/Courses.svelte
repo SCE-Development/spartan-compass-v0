@@ -11,26 +11,25 @@
 
   let { courses } = $props<{ courses: Course[] }>();
 </script>
-
-<div class="overflow-x-auto">
-  <table class="table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Course Number</th>
-        <th>Course Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each courses as course, i}
+<main class="flex justify-center w-full px-6 py-4">
+  <div class="overflow-x-auto w-4/5">
+    <table class="table">
+      <thead>
         <tr>
-          <th>{i + 1}</th>
-          <td>{course.subject}-{course.courseNumber}</td>
-          <td>{course.title}</td>
-          <td>{course.description}</td>
+          <th>Course Number</th>
+          <th>Course Name</th>
+          <th>Description</th>
         </tr>
-      {/each}
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        {#each courses as course, i}
+          <tr>
+            <td>{course.subject}-{course.courseNumber}</td>
+            <td>{course.title}</td>
+            <td>{course.description}</td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </div>
+</main>
