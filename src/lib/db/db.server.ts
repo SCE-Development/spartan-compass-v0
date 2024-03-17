@@ -1,3 +1,6 @@
+import { config } from 'dotenv';
+config();
+
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 const { DATABASE_URL } = process.env;
