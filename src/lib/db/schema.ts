@@ -42,6 +42,28 @@ export const coursesTable = pgTable('courses', {
 	description: text('description')
 });
 
+export const ratingsTable = pgTable(
+	'reviews', 
+	{
+		userId: varchar('userId')
+			.notNull()
+			.references(() => userTable.id),
+		professorId: integer('professor_id')
+			.notNull()
+			.references(() => professorsTable.id),
+		rating: integer('rating')
+	    	.notNull(),
+		courseId: integer('course_id')
+			.notNull()
+			.references(() => coursesTable.id),
+		review: text('review').notNull(),
+		createdAt: timestamp('createdAt', {
+			withTimezone: true,
+			mode: 'date'
+		}).notNull()	
+});
+
+
 export const professorsCoursesTable = pgTable(
 	'professors_courses',
 	{
@@ -66,4 +88,19 @@ export const professorsCoursesRelations = relations(professorsCoursesTable, ({ o
 		fields: [professorsCoursesTable.courseId],
 		references: [coursesTable.id]
 	})
+}));
+
+export const ratingsRelations = relations(ratingsTable, ({ one }) => ({
+    user: one(userTable, {
+        fields: [ratingsTable.userId],
+        references: [userTable.id]
+    }),
+    professor: one(professorsTable, {
+        fields: [ratingsTable.professorId],
+        references: [professorsTable.id]
+    }),
+    course: one(coursesTable, {
+        fields: [ratingsTable.courseId],
+        references: [coursesTable.id]
+    })
 }));
