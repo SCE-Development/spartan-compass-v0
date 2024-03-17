@@ -43,6 +43,7 @@ export const coursesTable = pgTable('courses', {
 });
 
 export const ratingsTable = pgTable('reviews', {
+	id: serial('id').primaryKey(),
 	userId: varchar('userId')
 		.notNull()
 		.references(() => userTable.id),
