@@ -24,6 +24,13 @@ export const load: PageServerLoad = async ({ params }) => {
     .from(professorsCoursesTable)
     .where(eq(professorsCoursesTable.professorId, professor[0].id))
 
+  if (coursesIds.length === 0) {
+    return {
+      professor: professor[0],
+      courses: [] 
+    };
+  }
+
   const courses = await db
     .select({
       id: coursesTable.id,
