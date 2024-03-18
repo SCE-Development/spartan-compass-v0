@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowUpRight } from 'lucide-svelte';
+  import { page } from "$app/stores";
 
   interface Course {
     id: number;
@@ -18,7 +18,7 @@
     <div class="flex justify-between items-center">
       <div>
         <div>
-          <div class="text-lg font-semibold">{course.subject}-{course.courseNumber}: {course.title}</div>
+          <a href={`${$page.url.pathname}/${course.subject}-${course.courseNumber}`} class="text-lg font-semibold hover:underline">{course.subject}-{course.courseNumber}: {course.title}</a>
           <p class="text-gray-400">{course.description}</p>
         </div>
       </div>
