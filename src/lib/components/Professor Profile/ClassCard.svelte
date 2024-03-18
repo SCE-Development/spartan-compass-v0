@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import { goto } from "$app/navigation";
 
   interface Course {
     id: number;
@@ -18,7 +19,7 @@
     <div class="flex justify-between items-center">
       <div>
         <div>
-          <a href={`${$page.url.pathname}/${course.subject}-${course.courseNumber}`} class="text-lg font-semibold hover:underline">{course.subject}-{course.courseNumber}: {course.title}</a>
+          <div class="text-lg font-semibold">{course.subject}-{course.courseNumber}: {course.title}</div>
           <p class="text-gray-400">{course.description}</p>
         </div>
       </div>
@@ -29,7 +30,7 @@
             5.0
           </span>
         </div>
-        <button class="btn btn-secondary btn-sm">
+        <button class="btn btn-secondary btn-sm" on:click={() => goto(`${$page.url.pathname}/${course.subject}-${course.courseNumber}`)}>
           Reviews
         </button>
       </div>
