@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { professorsCoursesRelations } from "$lib/db/schema";
 
+  import ClassCard from "./ClassCard.svelte";
+
   interface Course {
     id: number;
     title: string;
@@ -11,25 +13,13 @@
 
   let { courses } = $props<{ courses: Course[] }>();
 </script>
-<main class="flex justify-center w-full px-6 py-4">
-  <div class="overflow-x-auto w-4/5">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Course Number</th>
-          <th>Course Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each courses as course, i}
-          <tr>
-            <td>{course.subject}-{course.courseNumber}</td>
-            <td>{course.title}</td>
-            <td>{course.description}</td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
+
+<div class="flex flex-wrap px-2">
+  {#each courses as course}
+  <div class="w-full sm:w-1/2 xl:w-1/3 mb-4 px-2">
+    <ClassCard course={course} />
   </div>
-</main>
+  {/each}
+</div>
+
+
