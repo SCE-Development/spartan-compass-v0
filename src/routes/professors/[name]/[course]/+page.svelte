@@ -1,5 +1,5 @@
 <script lang="ts">
+  import Avatar from "$lib/components/Professor Profile/Avatar.svelte";
   let { data } = $props();
 </script>
-
-<div>Reviews for {data.course} taught by {data.name}</div>
+<Avatar professor={data.professor} course={data.course}/>
