@@ -101,3 +101,14 @@ export const ratingsRelations = relations(ratingsTable, ({ one }) => ({
 		references: [coursesTable.id]
 	})
 }));
+
+export const schema = {
+	userTable,
+	sessionTable,
+	professorsTable,
+	coursesTable,
+	ratingsTable,
+	professorsCoursesTable,
+	professorsCoursesRelations,
+	ratingsRelations
+};
