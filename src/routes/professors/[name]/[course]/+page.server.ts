@@ -20,20 +20,18 @@ export const load: PageServerLoad = async ({ params }) => {
   const courseSubject = courseName.split(' ')[0];
   const courseNum = courseName.split(' ')[1];
 
-  const course = await db
+  const courses = await db
     .select()
     .from(coursesTable)
     .where(and(eq(coursesTable.subject, courseSubject), eq(coursesTable.courseNumber, Number(courseNum))))
 
-  if (course.length === 0) {
-    return {
-      professor: professor[0],
-      course: null
-    };
+  if (courses.length === 0) {
+    return error(404, 'Professor does not teach this course');
   }
 
   return {
     professor: professor[0],
-    course: course[0]
+    courses,
+    showCourse: true
   };
 }

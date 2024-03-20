@@ -6,5 +6,5 @@
 
 </script>
 
-<Avatar professor={data.professor} course={null} />
+<Avatar avatarProps={data} />
 <Courses courses={data.courses}/>

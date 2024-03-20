@@ -27,7 +27,8 @@ export const load: PageServerLoad = async ({ params }) => {
   if (coursesIds.length === 0) {
     return {
       professor: professor[0],
-      courses: [] 
+      courses: [],
+      showCourse: false 
     };
   }
 
@@ -45,6 +46,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
   return {
     professor: professor[0],
-    courses
+    courses,
+    showCourse: false
   };
 }

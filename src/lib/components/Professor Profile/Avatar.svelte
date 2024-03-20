@@ -1,19 +1,24 @@
 <script lang="ts">
-  interface Professor {
-    id: number;
-    name: string;
-    department: string;
+  interface AvatarProps {
+    professor: {
+      id: number;
+      name: string;
+      department: string;
+    },
+    courses: {
+      id: number;
+      title: string;
+      subject: string;
+      courseNumber: number;
+      description: string | null;
+    }[],
+    showCourse: boolean;
   }
 
-  interface Course {
-    id: number;
-    title: string;
-    subject: string;
-    courseNumber: number;
-    description: string | null;
-  }
 
-  let { professor, course } = $props();
+  let { avatarProps } = $props<{ avatarProps: AvatarProps }>();
+  let professor = avatarProps.professor;
+  let course = (avatarProps.courses.length > 0) ? avatarProps.courses[0] : null;
 
   const initials: string = professor.name.split(' ').map((n) => n[0]).join('');
 </script>
@@ -30,7 +35,7 @@
       <div class="font-bold text-2xl mt-1 text-neutral">{professor.name}</div>
     </div>
 
-    {#if course}
+    {#if avatarProps.showCourse && course}
       <div class="mr-6">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right text-base-100"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>              
       </div>
