@@ -5,7 +5,7 @@
 		department: string;
 	}
 
-	let { professors } = $props<{ professors: Professor[] }>();
+	let { professors }: { professors: Professor[] } = $props();
 </script>
 
 <div class="overflow-x-auto">
