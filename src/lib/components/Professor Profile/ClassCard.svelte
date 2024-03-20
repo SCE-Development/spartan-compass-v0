@@ -2,15 +2,16 @@
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
 
-  interface Course {
+  interface ExtendedCourse {
     id: number;
     title: string;
     subject: string;
     courseNumber: number;
     description: string | null;
+    averageRating?: number; 
   }
 
-  let { course } = $props<{ course: Course }>();
+  let { course }: { course: ExtendedCourse } = $props();
 </script>
 
 <div class="card w-full bg-base-300 shadow-xl">
@@ -27,7 +28,7 @@
       <div>
         <div class="flex justify-center items-center border-2 rounded-md h-16 mb-2">
           <span class="text-4xl">
-            5.0
+            {course.averageRating ? course.averageRating: "N/A"}
           </span>
         </div>
         <button class="btn btn-secondary btn-sm" on:click={() => goto(`${$page.url.pathname}/${course.subject}-${course.courseNumber}`)}>

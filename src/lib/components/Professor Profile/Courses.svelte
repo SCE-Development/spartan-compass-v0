@@ -3,15 +3,16 @@
 
   import ClassCard from "./ClassCard.svelte";
 
-  interface Course {
+  interface ExtendedCourse {
     id: number;
     title: string;
     subject: string;
     courseNumber: number;
     description: string | null;
+    averageRating?: number; 
   }
 
-  let { courses } = $props<{ courses: Course[] }>();
+  let { courses }: { courses: ExtendedCourse[]} = $props();
 </script>
 
 <div class="flex flex-wrap px-2">
