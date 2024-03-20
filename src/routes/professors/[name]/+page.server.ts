@@ -54,7 +54,10 @@ export const load: PageServerLoad = async ({ params }) => {
     .where(inArray(coursesTable.id, coursesIds.map((course) => course.id)));
   
   const ratings = await db
-    .select()
+    .select({
+      courseId: ratingsTable.courseId,
+      rating: ratingsTable.rating
+    })
     .from(ratingsTable)
     .where(inArray(ratingsTable.courseId, courses.map((course) => course.id)));
 
