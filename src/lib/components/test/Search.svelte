@@ -8,7 +8,7 @@
 		courseNumber: number;
 	}
 
-	let { courses } = $props<{ courses: Course[] }>();
+	let { courses }: { courses: Course[] } = $props();
 
 	let selectedSubject = $state<string | undefined>(undefined);
 	let selectedCourseNumber = $state<number | undefined>(undefined);
