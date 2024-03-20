@@ -2,6 +2,8 @@
 	import { tick } from 'svelte';
 	import { slide } from 'svelte/transition';
 
+	import { Menu, Search } from 'lucide-svelte';
+
 	import Login from '$lib/components/Login.svelte';
 	import Logout from '$lib/components/Logout.svelte';
 
@@ -36,17 +38,7 @@
 		class="input input-bordered input-accent mt-1 flex hidden h-10 w-[35%] place-content-between md:flex"
 	>
 		<input type="text" placeholder="Search" />
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 16 16"
-			fill="currentColor"
-			class="h-5 w-5 opacity-90"
-			><path
-				fill-rule="evenodd"
-				d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-				clip-rule="evenodd"
-			/>
-		</svg>
+		<Search />
 	</label>
 
 	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
@@ -60,36 +52,12 @@
 	</div>
 	<div>
 		<div class="md:hidden">
-			<button class="btn btn-ghost" on:click={toggleSearch}
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 16 16"
-					fill="currentColor"
-					class="h-6 w-6 opacity-90"
-					><path
-						fill-rule="evenodd"
-						d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-						clip-rule="evenodd"
-					/>
-				</svg></button
-			>
+			<button class="btn btn-ghost" on:click={toggleSearch}><Search /> </button>
 		</div>
 
 		<div class="dropdown dropdown-end lg:hidden">
 			<div tabindex="0" role="button" class="btn btn-ghost">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					><path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M4 6h16M4 12h8m-8 6h16"
-					/></svg
-				>
+				<Menu />
 			</div>
 			<ul
 				class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 outline outline-1 outline-accent/50"
