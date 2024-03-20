@@ -3,15 +3,20 @@ import { lucia } from '$lib/server/auth';
 import { googleAuth } from '$lib/server/auth';
 import { generateState, generateCodeVerifier } from 'arctic';
 import { dev } from '$app/environment';
-
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import { schema } from '$lib/formSchema';
 
-// delete later
 export const load: PageServerLoad = async (event: RequestEvent) => {
+
+	const form = await superValidate(zod(schema));
+	
 	if (event.locals.user) {
 		return {
-			user: event.locals.user
+			user: event.locals.user,
+			form
 		};
 	}
 };
@@ -51,5 +56,12 @@ export const actions: Actions = {
 		});
 
 		return redirect(302, url.toString());
+	},
+	search: async (event) => {
+		const form = await superValidate(event, zod(schema));
+    	console.log(form.data.courseID);
+		
+		throw redirect(302, `/course/${form.data.courseID}`)
 	}
+	
 };

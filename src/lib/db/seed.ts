@@ -1,12 +1,13 @@
 import { db } from './db.server';
-import { professorsTable, coursesTable, professorsCoursesTable } from './schema';
+import { professorsTable, coursesTable, professorsCoursesTable, ratingsTable, userTable } from './schema';
 
 const main = async () => {
 	try {
 		console.log('Seeding database');
-		await db.delete(professorsCoursesTable);
-		await db.delete(professorsTable);
-		await db.delete(coursesTable);
+		// await db.delete(professorsCoursesTable);
+		// await db.delete(professorsTable);
+		// await db.delete(coursesTable);
+		await db.delete(ratingsTable);
 
 		console.log('Inserting data');
 		const professors = [
@@ -118,9 +119,84 @@ const main = async () => {
 			{ professorId: 8, courseId: 11 } // Engineering professor teaching ENG course
 		];
 
-		await db.insert(professorsTable).values(professors);
-		await db.insert(coursesTable).values(courses);
-		await db.insert(professorsCoursesTable).values(professorsCourses);
+		const users = [
+			{ id: 'user1', username: 'SampleUser1', email: 'user1@example.com', googleId: 'someGoogleId1', createdAt: new Date() },
+			// Add more users as needed
+		];
+		const reviews = [
+			{
+				userId: 'qgupxod4zrb7oq0', 
+				professorId: 1,
+				courseId: 1,
+				rating: 5,
+				review: 'Great introduction to calculus.',
+				createdAt: new Date()
+			},
+			{
+				userId: 'qgupxod4zrb7oq0', 
+				professorId: 2,
+				courseId: 2,
+				rating: 4,
+				review: 'Very informative and engaging.',
+				createdAt: new Date()
+			},
+			{
+				userId: 'qgupxod4zrb7oq0',
+				professorId: 3,
+				courseId: 3,
+				rating: 3,
+				review: 'Interesting course, but could be better organized.',
+				createdAt: new Date()
+			},
+			{
+				userId: 'qgupxod4zrb7oq0',
+				professorId: 4,
+				courseId: 1,
+				rating: 5,
+				review: 'Excellent course, well taught.',
+				createdAt: new Date()
+			},
+			{
+				userId: 'qgupxod4zrb7oq0',
+				professorId: 1,
+				courseId: 7, // Assuming this is another course taught by professor 1
+				rating: 2,
+				review: 'Challenging material, but could use more examples.',
+				createdAt: new Date()
+			},
+			{
+				userId: 'qgupxod4zrb7oq0',
+				professorId: 1,
+				courseId: 4, // Assuming this is another course taught by professor 1
+				rating: 4,
+				review: 'Well-structured course with clear objectives.',
+				createdAt: new Date()
+			},
+			// Additional reviews for professorId 2
+			{
+				userId: 'qgupxod4zrb7oq0',
+				professorId: 2,
+				courseId: 5, // Assuming this is another course taught by professor 2
+				rating: 1,
+				review: 'The course content was outdated.',
+				createdAt: new Date()
+			},
+			{
+				userId: 'qgupxod4zrb7oq0',
+				professorId: 2,
+				courseId: 8, // Assuming this is another course taught by professor 2
+				rating: 5,
+				review: 'Engaging lectures and practical assignments.',
+				createdAt: new Date()
+			}
+		];
+
+		
+		// await db.insert(professorsTable).values(professors);
+		// await db.insert(coursesTable).values(courses);
+		// await db.insert(professorsCoursesTable).values(professorsCourses);
+		// await db.insert(userTable).values(users);
+		await db.insert(ratingsTable).values(reviews);
 		console.log('Database seeded, press Ctrl+C to exit');
 	} catch (error) {
 		console.error(error);
