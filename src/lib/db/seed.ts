@@ -1,14 +1,27 @@
 import { db } from './db.server';
-import { professorsTable, coursesTable, professorsCoursesTable } from './schema';
+import { userTable, professorsTable, coursesTable, professorsCoursesTable, ratingsTable } from './schema';
+import { eq } from 'drizzle-orm';
 
 const main = async () => {
 	try {
 		console.log('Seeding database');
 		await db.delete(professorsCoursesTable);
+		await db.delete(ratingsTable);
 		await db.delete(professorsTable);
 		await db.delete(coursesTable);
-
+		await db.delete(userTable).where(eq(userTable.id, 'fake-user-id'));
+		
 		console.log('Inserting data');
+
+		const user = [
+			{
+				id: 'fake-user-id',
+				username: 'Fake User',
+				email: 'fakeuser@gmail.com',
+				googleId: 'fake-google-id',
+				createdAt: new Date()
+			}
+		]
 		const professors = [
 			{ id: 1, name: 'John Smith', department: 'Mathematics' },
 			{ id: 2, name: 'Jane Doe', department: 'Science' },
@@ -118,9 +131,50 @@ const main = async () => {
 			{ professorId: 8, courseId: 11 } // Engineering professor teaching ENG course
 		];
 
+		const ratings = [
+			{
+				id: 1,
+				userId: 'fake-user-id',
+				professorId: 4, // Alice Williams
+				rating: 5,
+				courseId: 1, // Calculus
+				review: 'Excellent course! The professor made complex topics easily understandable.',
+				createdAt: new Date()
+			},
+			{
+				id: 2,
+				userId: 'fake-user-id',
+				professorId: 4, // Alice Williams
+				rating: 4,
+				courseId: 4, // Algebra
+				review: 'Very informative and well-structured course. Highly recommend.',
+				createdAt: new Date()
+			},
+			{
+				id: 3,
+				userId: 'fake-user-id',
+				professorId: 4, // Alice Williams
+				rating: 5,
+				courseId: 7, // Advanced Calculus
+				review: 'Challenging yet rewarding. Alice Williams is a fantastic teacher.',
+				createdAt: new Date()
+			},
+			{
+				id: 4,
+				userId: 'fake-user-id',
+				professorId: 4, 
+				rating: 2,
+				courseId: 7, 
+				review: 'hi',
+				createdAt: new Date()
+			}
+		];
+		
+		await db.insert(userTable).values(user);
 		await db.insert(professorsTable).values(professors);
 		await db.insert(coursesTable).values(courses);
 		await db.insert(professorsCoursesTable).values(professorsCourses);
+		await db.insert(ratingsTable).values(ratings);
 		console.log('Database seeded, press Ctrl+C to exit');
 	} catch (error) {
 		console.error(error);
