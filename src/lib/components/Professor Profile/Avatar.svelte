@@ -16,7 +16,7 @@
   }
 
 
-  let { avatarProps } = $props<{ avatarProps: AvatarProps }>();
+  let { avatarProps }: { avatarProps: AvatarProps } = $props();
   let professor = avatarProps.professor;
   let course = (avatarProps.courses.length > 0) ? avatarProps.courses[0] : null;
 
