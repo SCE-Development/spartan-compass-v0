@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { page } from '$app/stores';
+	import { get } from 'svelte/store';
 	import { slide } from 'svelte/transition';
 
 	import { Menu, Search } from 'lucide-svelte';
@@ -9,7 +10,7 @@
 	import Logout from '$lib/components/Logout.svelte';
 
 	let { user } = $props();
-	let onRoot = $derived($page.url.pathname === '/');
+	let onRoot = $derived($page.url.pathname === '/'); // eslint-disable-line
 
 	let showSearch = $state(false);
 	let searchBox: HTMLInputElement | undefined = $state();
