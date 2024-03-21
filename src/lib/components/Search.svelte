@@ -9,6 +9,5 @@
 <form method="POST" action="?/search">
 	<input type="text" name="courseName" bind:value={$form.courseName as string} />
 	<input type="text" name="courseNumber" bind:value={$form.courseNumber as string} />
-	<input type="number" name="courseID" bind:value={$form.courseID as number} />
 	<button type="submit">Search</button>
 </form>

@@ -4,10 +4,11 @@ import { professorsTable, coursesTable, professorsCoursesTable, ratingsTable, us
 const main = async () => {
 	try {
 		console.log('Seeding database');
-		// await db.delete(professorsCoursesTable);
-		// await db.delete(professorsTable);
-		// await db.delete(coursesTable);
+		await db.delete(professorsCoursesTable);
+		await db.delete(professorsTable);
+		await db.delete(coursesTable);
 		await db.delete(ratingsTable);
+		await db.delete(userTable);
 
 		console.log('Inserting data');
 		const professors = [
@@ -125,7 +126,7 @@ const main = async () => {
 		];
 		const reviews = [
 			{
-				userId: 'qgupxod4zrb7oq0', 
+				userId: 'user1', 
 				professorId: 1,
 				courseId: 1,
 				rating: 5,
@@ -133,7 +134,7 @@ const main = async () => {
 				createdAt: new Date()
 			},
 			{
-				userId: 'qgupxod4zrb7oq0', 
+				userId: 'user1', 
 				professorId: 2,
 				courseId: 2,
 				rating: 4,
@@ -141,7 +142,7 @@ const main = async () => {
 				createdAt: new Date()
 			},
 			{
-				userId: 'qgupxod4zrb7oq0',
+				userId: 'user1',
 				professorId: 3,
 				courseId: 3,
 				rating: 3,
@@ -149,7 +150,7 @@ const main = async () => {
 				createdAt: new Date()
 			},
 			{
-				userId: 'qgupxod4zrb7oq0',
+				userId: 'user1',
 				professorId: 4,
 				courseId: 1,
 				rating: 5,
@@ -157,7 +158,7 @@ const main = async () => {
 				createdAt: new Date()
 			},
 			{
-				userId: 'qgupxod4zrb7oq0',
+				userId: 'user1',
 				professorId: 1,
 				courseId: 7, // Assuming this is another course taught by professor 1
 				rating: 2,
@@ -165,7 +166,7 @@ const main = async () => {
 				createdAt: new Date()
 			},
 			{
-				userId: 'qgupxod4zrb7oq0',
+				userId: 'user1',
 				professorId: 1,
 				courseId: 4, // Assuming this is another course taught by professor 1
 				rating: 4,
@@ -174,7 +175,7 @@ const main = async () => {
 			},
 			// Additional reviews for professorId 2
 			{
-				userId: 'qgupxod4zrb7oq0',
+				userId: 'user1',
 				professorId: 2,
 				courseId: 5, // Assuming this is another course taught by professor 2
 				rating: 1,
@@ -182,7 +183,7 @@ const main = async () => {
 				createdAt: new Date()
 			},
 			{
-				userId: 'qgupxod4zrb7oq0',
+				userId: 'user1',
 				professorId: 2,
 				courseId: 8, // Assuming this is another course taught by professor 2
 				rating: 5,
@@ -192,10 +193,10 @@ const main = async () => {
 		];
 
 		
-		// await db.insert(professorsTable).values(professors);
-		// await db.insert(coursesTable).values(courses);
-		// await db.insert(professorsCoursesTable).values(professorsCourses);
-		// await db.insert(userTable).values(users);
+		await db.insert(professorsTable).values(professors);
+		await db.insert(coursesTable).values(courses);
+		await db.insert(professorsCoursesTable).values(professorsCourses);
+		await db.insert(userTable).values(users);
 		await db.insert(ratingsTable).values(reviews);
 		console.log('Database seeded, press Ctrl+C to exit');
 	} catch (error) {

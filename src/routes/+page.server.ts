@@ -7,11 +7,19 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { schema } from '$lib/formSchema';
+import { db } from '$lib/db/db.server';
+import { coursesTable } from '$lib/db/schema';
+import { and, eq } from 'drizzle-orm';
+import { z } from 'zod';
+
+const searchSchema = z.object({
+	courseName: z.string(),
+	courseNumber: z.string(),
+});
 
 export const load: PageServerLoad = async (event: RequestEvent) => {
 
-	const form = await superValidate(zod(schema));
+	const form = await superValidate(zod(searchSchema));
 	
 	if (event.locals.user) {
 		return {
@@ -57,11 +65,14 @@ export const actions: Actions = {
 
 		return redirect(302, url.toString());
 	},
-	search: async (event) => {
-		const form = await superValidate(event, zod(schema));
-    	console.log(form.data.courseID);
-		
-		throw redirect(302, `/course/${form.data.courseID}`)
+	search: async (request) => {
+		const form = await superValidate(request, zod(searchSchema));
+    	console.log(form.data)
+		const courseName = form.data.courseName
+		const courseNum = Number(form.data.courseNumber)
+		const courseID = await db.select({id: coursesTable.id}).from(coursesTable).where(and(eq(coursesTable.subject, courseName), eq(coursesTable.courseNumber, courseNum)))
+		console.log(courseID)
+		throw redirect(302, `/course/${courseID[0].id}`)
 	}
 	
 };

@@ -2,7 +2,10 @@ import { db } from '$lib/db/db.server';
 import { coursesTable, professorsCoursesTable, professorsTable, ratingsTable } from '$lib/db/schema';
 import { asc, eq, inArray } from 'drizzle-orm';
 
-export const load = async () => {
+export const load = async ({params}) => {
+	const { id} = params;
+	
+	//console.log(id);
 	const result = await db
 		.select({
 			id: coursesTable.id,
@@ -12,58 +15,53 @@ export const load = async () => {
 			description: coursesTable.description
 		})
 		.from(coursesTable)
-		.orderBy(asc(coursesTable.subject));
+		.where(eq(coursesTable.id, Number(id)));
+	const reviews = await db
+		.select({
+			userId: ratingsTable.userId,
+			professorId: ratingsTable.professorId,
+			rating: ratingsTable.rating,
+			review: ratingsTable.review,
+			courseId: ratingsTable.courseId
+		})
+		.from(ratingsTable)
+		.where(eq(ratingsTable.courseId, Number(id)));
 
+		const professorIds = reviews.map(review => review.professorId);
+
+    // Query professorsTable to get professor names
+	let professors: any[] = [];
+	if (professorIds.length > 0) {
+		// Query professorsTable to get professor names
+		professors = await db
+			.select({
+				id: professorsTable.id,
+				name: professorsTable.name
+			})
+			.from(professorsTable)
+			.where(inArray(professorsTable.id, professorIds));
+	}
+	
+
+    // Map professor names to reviews
+    const reviewsWithProfessorNames = reviews.map(review => {
+        const professor = professors.find(professor => professor.id === review.professorId);
+        return {
+            ...review,
+            professorName: professor ? professor.name : 'Unknown'
+        };
+    });
+
+		
 	return {
-		courseData: result
+		courseData: result[0],
+		reviewData: reviewsWithProfessorNames
 	};
 };
 
 export const actions = {
 	search: async ({ request }) => {
 		const data = await request.formData();
-		const courseId = Number(data.get('courseId'));
-
-		const professorsIds = await db
-			.select({
-				id: professorsCoursesTable.professorId
-			})
-			.from(professorsCoursesTable)
-			.where(eq(professorsCoursesTable.courseId, courseId));
-
-		const ids = professorsIds.map((professor) => professor.id);
 		
-		const professors = await db
-			.select({
-				id: professorsTable.id,
-				name: professorsTable.name,
-				department: professorsTable.department
-			})
-			.from(professorsTable)
-			.orderBy(asc(professorsTable.name))
-			.where(inArray(professorsTable.id, ids));
-		
-		const reviews = await db
-			.select({
-				professorId: ratingsTable.professorId,
-				rating: ratingsTable.rating,
-				courseId: ratingsTable.courseId,
-				review: ratingsTable.review,
-				createdAt: ratingsTable.createdAt
-		})
-
-		const reviews2 = await db
-			.select({
-				professorId: ratingsTable.professorId,
-				rating: ratingsTable.rating,
-				courseId: ratingsTable.courseId
-			})
-			.from(ratingsTable)
-			.where(inArray((ratingsTable.professorId), ids))
-		
-		console.log(reviews2[0]);
-		return {
-			professors
-		};
 	}
 };
