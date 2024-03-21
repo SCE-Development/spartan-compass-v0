@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { data, form } = $props();
+	let { data } = $props();
 	console.log(data);
 	let course = $derived(data.courseData);
 	let reviews = $derived(data.reviewData);
