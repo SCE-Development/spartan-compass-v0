@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { page } from '$app/stores';
-	import { get } from 'svelte/store';
 	import { slide } from 'svelte/transition';
 
 	import { Menu, Search } from 'lucide-svelte';
