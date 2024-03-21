@@ -1,9 +1,5 @@
 import { db } from '$lib/db/db.server';
-import {
-	coursesTable,
-	professorsTable,
-	ratingsTable
-} from '$lib/db/schema';
+import { coursesTable, professorsTable, ratingsTable } from '$lib/db/schema';
 import { eq, inArray } from 'drizzle-orm';
 
 export const load = async ({ params }) => {
@@ -37,9 +33,9 @@ export const load = async ({ params }) => {
 	interface Professor {
 		id: number;
 		name: string;
-	  }
-	  
-	  let professors: Professor[] = [];
+	}
+
+	let professors: Professor[] = [];
 	if (professorIds.length > 0) {
 		// Query professorsTable to get professor names
 		professors = await db
@@ -65,4 +61,3 @@ export const load = async ({ params }) => {
 		reviewData: reviewsWithProfessorNames
 	};
 };
-
