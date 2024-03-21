@@ -1,5 +1,11 @@
 import { db } from './db.server';
-import { professorsTable, coursesTable, professorsCoursesTable, ratingsTable, userTable } from './schema';
+import {
+	professorsTable,
+	coursesTable,
+	professorsCoursesTable,
+	ratingsTable,
+	userTable
+} from './schema';
 
 const main = async () => {
 	try {
@@ -121,12 +127,18 @@ const main = async () => {
 		];
 
 		const users = [
-			{ id: 'user1', username: 'SampleUser1', email: 'user1@example.com', googleId: 'someGoogleId1', createdAt: new Date() },
+			{
+				id: 'user1',
+				username: 'SampleUser1',
+				email: 'user1@example.com',
+				googleId: 'someGoogleId1',
+				createdAt: new Date()
+			}
 			// Add more users as needed
 		];
 		const reviews = [
 			{
-				userId: 'user1', 
+				userId: 'user1',
 				professorId: 1,
 				courseId: 1,
 				rating: 5,
@@ -134,7 +146,7 @@ const main = async () => {
 				createdAt: new Date()
 			},
 			{
-				userId: 'user1', 
+				userId: 'user1',
 				professorId: 2,
 				courseId: 2,
 				rating: 4,
@@ -192,7 +204,6 @@ const main = async () => {
 			}
 		];
 
-		
 		await db.insert(professorsTable).values(professors);
 		await db.insert(coursesTable).values(courses);
 		await db.insert(professorsCoursesTable).values(professorsCourses);
