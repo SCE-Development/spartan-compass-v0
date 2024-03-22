@@ -4,7 +4,6 @@
 	let reviews = $derived(data.reviewData);
 </script>
 
-<div>{course.id}</div>
 <div>{course.title}</div>
 <div>{course.subject}</div>
 <div>{course.courseNumber}</div>
