@@ -4,8 +4,7 @@ import {
 	coursesTable,
 	professorsCoursesTable,
 	ratingsTable,
-	userTable,
-	sessionTable
+	userTable
 } from './schema';
 
 const main = async () => {

@@ -1,10 +1,10 @@
 <script lang="ts">
-    let { data } = $props();
-    console.log(data);
-    let course = $derived(data.courseData);
-    let reviews = $derived(data.reviewData);
-    $inspect(course);
-    $inspect(reviews);
+	let { data } = $props();
+	console.log(data);
+	let course = $derived(data.courseData);
+	let reviews = $derived(data.reviewData);
+	$inspect(course);
+	$inspect(reviews);
 </script>
 
 <div>{course.id}</div>
@@ -14,14 +14,14 @@
 <div>{course.description}</div>
 
 <table class="table">
-    <tbody>
-        {#each reviews as review, i}
-            <tr>
-                <th>{i + 1}</th>
-                <td> {review.professorName}</td>
-                <td>{review.rating}</td>
-                <td>{review.review}</td>
-            </tr>
-        {/each}
-    </tbody>
+	<tbody>
+		{#each reviews as review, i}
+			<tr>
+				<th>{i + 1}</th>
+				<td> {review.professorName}</td>
+				<td>{review.rating}</td>
+				<td>{review.review}</td>
+			</tr>
+		{/each}
+	</tbody>
 </table>
