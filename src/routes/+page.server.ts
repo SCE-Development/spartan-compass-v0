@@ -8,26 +8,27 @@ import { coursesTable } from '$lib/db/schema';
 import { and, eq } from 'drizzle-orm';
 
 const schema = z.object({
-	courseSub: z.string(),
-	courseNum: z.string()
+	courseName: z.string(),
+	courseNumber: z.string()
 });
 // delete later
 export const load: PageServerLoad = async (event: RequestEvent) => {
-	const form  = await superValidate(zod(schema));
-	if (event.locals.user) {
-		return {
-			user: event.locals.user,
-			form
-		};
-	}
+    const form = await superValidate(zod(schema));
+    
+    // Always return form
+    // Include user in the return object if event.locals.user exists
+    return {
+        user: event.locals.user ? event.locals.user : null, // or simply event.locals.user to keep it undefined if not logged in
+        form
+    };
 };
 
 export const actions: Actions = {
     search: async (request) => {
         const form = await superValidate(request, zod(schema));
         console.log(form.data)
-        const courseName = form.data.courseSub
-        const courseNum = Number(form.data.courseNum)
+        const courseName = form.data.courseName
+        const courseNum = Number(form.data.courseNumber)
         const courseID = await db.select({id: coursesTable.id}).from(coursesTable).where(and(eq(coursesTable.subject, courseName), eq(coursesTable.courseNumber, courseNum)))
         console.log(courseID)
         throw redirect(302, `/course/${courseID[0].id}`)
