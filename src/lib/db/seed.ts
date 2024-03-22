@@ -1,5 +1,11 @@
 import { db } from './db.server';
-import { userTable, professorsTable, coursesTable, professorsCoursesTable, ratingsTable } from './schema';
+import {
+	userTable,
+	professorsTable,
+	coursesTable,
+	professorsCoursesTable,
+	ratingsTable
+} from './schema';
 import { eq } from 'drizzle-orm';
 
 const main = async () => {
@@ -10,7 +16,7 @@ const main = async () => {
 		await db.delete(professorsTable);
 		await db.delete(coursesTable);
 		await db.delete(userTable).where(eq(userTable.id, 'fake-user-id'));
-		
+
 		console.log('Inserting data');
 
 		const user = [
@@ -21,7 +27,7 @@ const main = async () => {
 				googleId: 'fake-google-id',
 				createdAt: new Date()
 			}
-		]
+		];
 		const professors = [
 			{ id: 1, name: 'John Smith', department: 'Mathematics' },
 			{ id: 2, name: 'Jane Doe', department: 'Science' },
@@ -162,14 +168,14 @@ const main = async () => {
 			{
 				id: 4,
 				userId: 'fake-user-id',
-				professorId: 4, 
+				professorId: 4,
 				rating: 2,
-				courseId: 7, 
+				courseId: 7,
 				review: 'hi',
 				createdAt: new Date()
 			}
 		];
-		
+
 		await db.insert(userTable).values(user);
 		await db.insert(professorsTable).values(professors);
 		await db.insert(coursesTable).values(courses);
