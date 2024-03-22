@@ -17,5 +17,5 @@
 		class="input input-bordered input-accent"
 		bind:value={$form.courseNumber as string}
 	/>
-	<button type="submit">Search</button>
+	<button type="submit" class="btn btn-ghost">Search</button>
 </form>
