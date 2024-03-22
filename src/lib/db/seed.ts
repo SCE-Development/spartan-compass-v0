@@ -10,11 +10,11 @@ import {
 const main = async () => {
 	try {
 		console.log('Seeding database');
+		await db.delete(ratingsTable);
 		await db.delete(professorsCoursesTable);
 		await db.delete(professorsTable);
 		await db.delete(coursesTable);
-		await db.delete(ratingsTable);
-		//await db.delete(userTable);
+		await db.delete(userTable);
 
 		console.log('Inserting data');
 		const professors = [
