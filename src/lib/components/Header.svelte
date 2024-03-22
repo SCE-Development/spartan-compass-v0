@@ -9,7 +9,7 @@
 	import Logout from '$lib/components/Logout.svelte';
 
 	let { user } = $props();
-	let onRoot = $derived($page.url.pathname === '/'); // eslint-disable-line
+	let onRoot = $derived($page.url.pathname === '/');
 
 	let showSearch = $state(false);
 	let searchBox: HTMLInputElement | undefined = $state();

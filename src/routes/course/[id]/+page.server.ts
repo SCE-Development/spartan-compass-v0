@@ -28,7 +28,6 @@ export const load = async ({ params }) => {
 
 	const professorIds = reviews.map((review) => review.professorId);
 
-	// Query professorsTable to get professor names
 	interface Professor {
 		id: number;
 		name: string;
@@ -36,7 +35,6 @@ export const load = async ({ params }) => {
 
 	let professors: Professor[] = [];
 	if (professorIds.length > 0) {
-		// Query professorsTable to get professor names
 		professors = await db
 			.select({
 				id: professorsTable.id,
@@ -46,7 +44,6 @@ export const load = async ({ params }) => {
 			.where(inArray(professorsTable.id, professorIds));
 	}
 
-	// Map professor names to reviews
 	const reviewsWithProfessorNames = reviews.map((review) => {
 		const professor = professors.find((professor) => professor.id === review.professorId);
 		return {
