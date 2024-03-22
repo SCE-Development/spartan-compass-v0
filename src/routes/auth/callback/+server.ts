@@ -56,7 +56,6 @@ export async function GET(event: RequestEvent): Promise<Response> {
 				...sessionCookie.attributes
 			});
 		}
-		console.log('User logged in as ' + name + ' (' + email + ')');
 		return new Response('Authenticated', {
 			status: 302,
 			headers: {

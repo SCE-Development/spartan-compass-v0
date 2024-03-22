@@ -5,7 +5,6 @@ import { eq, inArray } from 'drizzle-orm';
 export const load = async ({ params }) => {
 	const { id } = params;
 
-	//console.log(id);
 	const result = await db
 		.select({
 			id: coursesTable.id,

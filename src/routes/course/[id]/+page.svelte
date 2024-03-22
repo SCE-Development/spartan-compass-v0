@@ -1,10 +1,7 @@
 <script lang="ts">
 	let { data } = $props();
-	console.log(data);
 	let course = $derived(data.courseData);
 	let reviews = $derived(data.reviewData);
-	$inspect(course);
-	$inspect(reviews);
 </script>
 
 <div>{course.id}</div>
