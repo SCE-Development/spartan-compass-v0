@@ -23,7 +23,7 @@
   const initials: string = professor.name.split(' ').map((n) => n[0]).join('');
 </script>
 
-<div class="flex mb-4 mt-2 w-full bg-zinc-300">
+<div class="flex mb-4 mt-2 justify-center w-full bg-zinc-300">
   <div class="flex w-full items-center overflow-hidden xl:w-3/4 rounded-lg px-8 py-6">
     <div class="avatar placeholder mr-6">
       <div class="bg-base-100 text-neutral-content rounded-full w-24">

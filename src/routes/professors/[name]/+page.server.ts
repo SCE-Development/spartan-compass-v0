@@ -14,6 +14,17 @@ type ExtendedCourse = {
   averageRating?: number; 
 };
 
+type ExtendedRating = {
+  id: number;
+  userId: string;
+  professorId: number;
+  rating: number; 
+  courseId: number;
+  createdAt: Date;
+  classNum: string;
+  classTitle: string | undefined;
+};
+
 export const load: PageServerLoad = async ({ params }) => {
   const professorName = params.name.split('-').join(' ');
 
@@ -53,11 +64,8 @@ export const load: PageServerLoad = async ({ params }) => {
     .orderBy(asc(coursesTable.title))
     .where(inArray(coursesTable.id, coursesIds.map((course) => course.id)));
   
-  const ratings = await db
-    .select({
-      courseId: ratingsTable.courseId,
-      rating: ratingsTable.rating
-    })
+  let ratings = await db
+    .select()
     .from(ratingsTable)
     .where(inArray(ratingsTable.courseId, courses.map((course) => course.id)));
 
@@ -76,11 +84,20 @@ export const load: PageServerLoad = async ({ params }) => {
     }
   });
 
-  console.log(extendedCourses)
+  // extend ratings with classNum and classTitle
+  const extendedRatings: ExtendedRating[] = ratings.map(rating => {
+    const correspondingCourse = courses.find(course => course.id === rating.courseId);
+    return {
+      ...rating,
+      classNum: `${correspondingCourse?.subject}-${correspondingCourse?.courseNumber}`,
+      classTitle: correspondingCourse?.title,
+    };
+  });
 
   return {
     professor: professor[0],
     courses: extendedCourses,
-    showCourse: false
+    showCourse: false,
+    ratings: extendedRatings
   };
 }
