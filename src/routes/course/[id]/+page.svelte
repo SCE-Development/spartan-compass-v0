@@ -14,7 +14,7 @@
 		{#each reviews as review, i}
 			<tr>
 				<th>{i + 1}</th>
-				<td> {review.professorName}</td>
+				<td>{review.professorName}</td>
 				<td>{review.rating}</td>
 				<td>{review.review}</td>
 			</tr>
