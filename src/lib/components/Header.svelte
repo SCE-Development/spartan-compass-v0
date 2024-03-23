@@ -2,7 +2,6 @@
 	import { tick } from 'svelte';
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
-	import { slide } from 'svelte/transition';
 
 	import { Menu, Search } from 'lucide-svelte';
 
@@ -32,7 +31,6 @@
 			class="input input-bordered input-accent mx-4 {!showSearch
 				? 'hidden'
 				: ''} h-10 grow justify-between gap-x-2 md:max-w-[35%] lg:flex"
-			in:slide={{ duration: 300 }}
 		>
 			<input class="max-w-full grow" type="text" placeholder="Search" bind:this={searchBox} />
 			<Search class="hidden lg:flex" />
