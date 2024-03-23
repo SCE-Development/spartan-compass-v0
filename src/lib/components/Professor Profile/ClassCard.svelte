@@ -19,15 +19,13 @@
 	<div class="card-body">
 		<div class="flex items-center justify-between">
 			<div>
-				<div>
-					<div class="text-lg font-semibold">
-						{course.subject}-{course.courseNumber}: {course.title}
-					</div>
-					<p class="text-gray-400">{course.description}</p>
+				<div class="text-lg font-semibold">
+					{course.subject}-{course.courseNumber}: {course.title}
 				</div>
+				<p class="text-gray-400">{course.description}</p>
 			</div>
 
-			<div>
+			<div class="ml-4">
 				<div class="mb-2 flex h-16 items-center justify-center rounded-md border-2">
 					<span class="text-4xl">
 						{course.averageRating ? course.averageRating : 'N/A'}
