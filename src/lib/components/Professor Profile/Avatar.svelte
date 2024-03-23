@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ChevronsRight } from "lucide-svelte";
 	interface AvatarProps {
 		professor: {
 			id: number;
@@ -38,20 +39,8 @@
 		</div>
 
 		{#if avatarProps.showCourse && course}
-			<div class="mr-6">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="32"
-					height="32"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					class="lucide lucide-chevrons-right text-base-100"
-					><path d="m6 17 5-5-5-5" /><path d="m13 17 5-5-5-5" /></svg
-				>
+			<div class="mr-6 text-base-100">
+				<ChevronsRight />
 			</div>
 			<div class="flex-col justify-center">
 				<p class="badge rounded-md px-2 py-3">{course.subject}-{course.courseNumber}</p>
