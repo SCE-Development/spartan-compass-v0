@@ -6,7 +6,7 @@
 	let user = $derived(data.user);
 </script>
 
-<div data-theme="dracula" class="text-center">
+<div data-theme="dracula">
 	<Header {user} />
 	<slot />
 </div>

@@ -1,22 +1,33 @@
 import { db } from './db.server';
 import {
+	userTable,
 	professorsTable,
 	coursesTable,
 	professorsCoursesTable,
-	ratingsTable,
-	userTable
+	ratingsTable
 } from './schema';
 
 const main = async () => {
 	try {
 		console.log('Seeding database');
-		await db.delete(ratingsTable);
 		await db.delete(professorsCoursesTable);
+		await db.delete(ratingsTable);
 		await db.delete(professorsTable);
 		await db.delete(coursesTable);
 		await db.delete(userTable);
 
 		console.log('Inserting data');
+
+		const users = [
+			{
+				id: 'user1',
+				username: 'SampleUser1',
+				email: 'user1@example.com',
+				googleId: 'someGoogleId1',
+				createdAt: new Date()
+			}
+			// Add more users as needed
+		];
 		const professors = [
 			{ id: 1, name: 'John Smith', department: 'Mathematics' },
 			{ id: 2, name: 'Jane Doe', department: 'Science' },
@@ -126,16 +137,6 @@ const main = async () => {
 			{ professorId: 8, courseId: 11 } // Engineering professor teaching ENG course
 		];
 
-		const users = [
-			{
-				id: 'user1',
-				username: 'SampleUser1',
-				email: 'user1@example.com',
-				googleId: 'someGoogleId1',
-				createdAt: new Date()
-			}
-			// Add more users as needed
-		];
 		const reviews = [
 			{
 				userId: 'user1',
@@ -204,10 +205,10 @@ const main = async () => {
 			}
 		];
 
+		await db.insert(userTable).values(users);
 		await db.insert(professorsTable).values(professors);
 		await db.insert(coursesTable).values(courses);
 		await db.insert(professorsCoursesTable).values(professorsCourses);
-		await db.insert(userTable).values(users);
 		await db.insert(ratingsTable).values(reviews);
 		console.log('Database seeded, press Ctrl+C to exit');
 	} catch (error) {
