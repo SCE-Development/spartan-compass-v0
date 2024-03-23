@@ -4,4 +4,4 @@
 	let { data } = $props();
 </script>
 
-<Avatar professor={data.professor} courses={data.courses} showCourse={data.showCourse} />
+<Avatar professor={data.professor} courses={data.courses} showCourse={true} />

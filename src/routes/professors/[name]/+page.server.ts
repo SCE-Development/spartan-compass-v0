@@ -112,7 +112,6 @@ export const load: PageServerLoad = async ({ params }) => {
 	return {
 		professor: professor[0],
 		courses: extendedCourses,
-		showCourse: false,
 		ratings: extendedRatings
 	};
 };
