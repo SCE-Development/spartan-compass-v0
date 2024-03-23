@@ -6,7 +6,6 @@ import {
 	professorsCoursesTable,
 	ratingsTable
 } from './schema';
-import { eq } from 'drizzle-orm';
 
 const main = async () => {
 	try {

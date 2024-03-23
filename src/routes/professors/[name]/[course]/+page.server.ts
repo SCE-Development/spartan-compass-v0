@@ -33,6 +33,6 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	return {
 		professor: professor[0],
-		courses,
+		courses
 	};
 };

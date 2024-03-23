@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { ChevronsRight } from "lucide-svelte";
+	import { ChevronsRight } from 'lucide-svelte';
 
 	interface Professor {
 		id: number;
 		name: string;
 		department: string;
-	};
-	
+	}
+
 	interface Course {
 		id: number;
 		title: string;
@@ -15,7 +15,11 @@
 		description: string | null;
 	}
 
-	let { professor, courses, showCourse }: { professor: Professor, courses: Course[], showCourse: boolean } = $props();
+	let {
+		professor,
+		courses,
+		showCourse
+	}: { professor: Professor; courses: Course[]; showCourse: boolean } = $props();
 	const initials: string = professor.name
 		.split(' ')
 		.map((n) => n[0])
