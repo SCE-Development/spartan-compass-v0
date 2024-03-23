@@ -9,7 +9,7 @@
 
 <div class="flex w-full flex-col items-center">
 	<Avatar professor={data.professor} courses={data.courses} showCourse={false} />
-	<div class="xl:w-3/4">
+	<div class="w-full xl:w-3/4">
 		<h2 class="my-4 ml-8 text-2xl font-semibold">{data.courses?.length} Courses</h2>
 		<Courses courses={data.courses} />
 		<h2 class="my-4 ml-8 text-2xl font-semibold">{ratings?.length} Reviews</h2>

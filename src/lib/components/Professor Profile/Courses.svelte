@@ -13,7 +13,7 @@
 	let { courses }: { courses: ExtendedCourse[] } = $props();
 </script>
 
-<div class="flex w-screen flex-wrap px-2">
+<div class="flex w-full flex-wrap px-2">
 	{#each courses as course}
 		<div class="mb-4 w-full px-2 md:w-1/2 xl:w-1/3">
 			<ClassCard {course} />
