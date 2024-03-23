@@ -136,7 +136,7 @@ const main = async () => {
 			{ professorId: 7, courseId: 10 }, // COMPSCI professor teaching COMPSCI course
 			{ professorId: 8, courseId: 11 } // Engineering professor teaching ENG course
 		];
-    
+
 		const reviews = [
 			{
 				userId: 'user1',
