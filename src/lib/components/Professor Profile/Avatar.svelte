@@ -1,29 +1,26 @@
 <script lang="ts">
 	import { ChevronsRight } from "lucide-svelte";
-	interface AvatarProps {
-		professor: {
-			id: number;
-			name: string;
-			department: string;
-		};
-		courses: {
-			id: number;
-			title: string;
-			subject: string;
-			courseNumber: number;
-			description: string | null;
-		}[];
-		showCourse: boolean;
+
+	interface Professor {
+		id: number;
+		name: string;
+		department: string;
+	};
+	
+	interface Course {
+		id: number;
+		title: string;
+		subject: string;
+		courseNumber: number;
+		description: string | null;
 	}
 
-	let { avatarProps }: { avatarProps: AvatarProps } = $props();
-	let professor = avatarProps.professor;
-	let course = avatarProps.courses.length > 0 ? avatarProps.courses[0] : null;
-
+	let { professor, courses, showCourse }: { professor: Professor, courses: Course[], showCourse: boolean } = $props();
 	const initials: string = professor.name
 		.split(' ')
 		.map((n) => n[0])
 		.join('');
+	const course = courses[0];
 </script>
 
 <div class="mb-4 mt-2 flex w-full justify-center bg-zinc-300">
@@ -38,7 +35,7 @@
 			<div class="mt-1 text-2xl font-bold text-neutral">{professor.name}</div>
 		</div>
 
-		{#if avatarProps.showCourse && course}
+		{#if showCourse && course}
 			<div class="mr-6 text-base-100">
 				<ChevronsRight />
 			</div>
