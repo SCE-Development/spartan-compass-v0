@@ -137,6 +137,17 @@ const main = async () => {
 			{ professorId: 8, courseId: 11 } // Engineering professor teaching ENG course
 		];
 
+		const users = [
+			{
+				id: 'user1',
+				username: 'SampleUser1',
+				email: 'user1@example.com',
+				googleId: 'someGoogleId1',
+				createdAt: new Date()
+			}
+			// Add more users as needed
+		];
+    
 		const reviews = [
 			{
 				userId: 'user1',
