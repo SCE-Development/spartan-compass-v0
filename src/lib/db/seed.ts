@@ -15,7 +15,7 @@ const main = async () => {
 		await db.delete(ratingsTable);
 		await db.delete(professorsTable);
 		await db.delete(coursesTable);
-		await db.delete(userTable).where(eq(userTable.id, 'fake-user-id'));
+		await db.delete(userTable);
 
 		console.log('Inserting data');
 
