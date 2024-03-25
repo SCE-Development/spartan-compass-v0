@@ -1,8 +1,19 @@
 import type { PageServerLoad } from './$types';
-import { professorsTable, coursesTable } from '$lib/db/schema';
+import { professorsTable, coursesTable, ratingsTable } from '$lib/db/schema';
 import { db } from '$lib/db/db.server';
 import { eq, and } from 'drizzle-orm';
 import { error } from '@sveltejs/kit';
+
+type ExtendedRating = {
+	id: number;
+	userId: string;
+	professorId: number;
+	rating: number;
+	courseId: number;
+	createdAt: Date;
+	classNum: string;
+	classTitle: string | undefined;
+};
 
 export const load: PageServerLoad = async ({ params }) => {
 	const professorName = params.name.split('-').join(' ');
@@ -17,6 +28,13 @@ export const load: PageServerLoad = async ({ params }) => {
 		return error(404, 'Professor not found');
 	}
 
+	const courseId = await db
+		.select()
+		.from(coursesTable)
+		.where(eq(coursesTable.title, courseName));
+
+	const professorId = professor[0].id;
+
 	const courseSubject = courseName.split(' ')[0];
 	const courseNum = courseName.split(' ')[1];
 
@@ -30,9 +48,29 @@ export const load: PageServerLoad = async ({ params }) => {
 	if (courses.length === 0) {
 		return error(404, 'Professor does not teach this course');
 	}
+	
+	const ratings = await db
+		.select()
+		.from(ratingsTable)
+		.where(
+			and(
+				eq(ratingsTable.professorId, professorId),
+				eq(ratingsTable.courseId, courses[0].id)
+			
+			)
+		);
+		
+	const extendedRatings: ExtendedRating[] = ratings.map((rating) => {
+		return {
+			...rating,
+			classNum: params.course,
+			classTitle: courses[0].title
+		};
+	});
 
 	return {
 		professor: professor[0],
-		courses
+		courses,
+		ratings: extendedRatings
 	};
 };
