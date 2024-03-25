@@ -28,11 +28,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		return error(404, 'Professor not found');
 	}
 
-	const courseId = await db
-		.select()
-		.from(coursesTable)
-		.where(eq(coursesTable.title, courseName));
-
 	const professorId = professor[0].id;
 
 	const courseSubject = courseName.split(' ')[0];
@@ -48,18 +43,14 @@ export const load: PageServerLoad = async ({ params }) => {
 	if (courses.length === 0) {
 		return error(404, 'Professor does not teach this course');
 	}
-	
+
 	const ratings = await db
 		.select()
 		.from(ratingsTable)
 		.where(
-			and(
-				eq(ratingsTable.professorId, professorId),
-				eq(ratingsTable.courseId, courses[0].id)
-			
-			)
+			and(eq(ratingsTable.professorId, professorId), eq(ratingsTable.courseId, courses[0].id))
 		);
-		
+
 	const extendedRatings: ExtendedRating[] = ratings.map((rating) => {
 		return {
 			...rating,
