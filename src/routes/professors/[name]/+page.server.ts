@@ -77,9 +77,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const ratings = await db
 		.select()
 		.from(ratingsTable)
-		.where(
-			eq(ratingsTable.professorId, professor[0].id)
-		);
+		.where(eq(ratingsTable.professorId, professor[0].id));
 
 	const extendedCourses: ExtendedCourse[] = courses.map((course) => ({
 		...course,
