@@ -10,26 +10,6 @@ import { eq, asc, inArray } from 'drizzle-orm';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-type ExtendedCourse = {
-	id: number;
-	title: string;
-	subject: string;
-	courseNumber: number;
-	description: string | null;
-	averageRating?: number;
-};
-
-type ExtendedRating = {
-	id: number;
-	userId: string;
-	professorId: number;
-	rating: number;
-	courseId: number;
-	createdAt: Date;
-	classNum: string;
-	classTitle: string | undefined;
-};
-
 export const load: PageServerLoad = async ({ params }) => {
 	const professorName = params.name.split('-').join(' ');
 
@@ -79,9 +59,9 @@ export const load: PageServerLoad = async ({ params }) => {
 		.from(ratingsTable)
 		.where(eq(ratingsTable.professorId, professor[0].id));
 
-	const extendedCourses: ExtendedCourse[] = courses.map((course) => ({
+	const extendedCourses = courses.map((course) => ({
 		...course,
-		averageRating: undefined
+		averageRating: 0
 	}));
 
 	// average ratings for each course
@@ -95,7 +75,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	});
 
 	// extend ratings with classNum and classTitle
-	const extendedRatings: ExtendedRating[] = ratings.map((rating) => {
+	const extendedRatings = ratings.map((rating) => {
 		const correspondingCourse = courses.find((course) => course.id === rating.courseId);
 		return {
 			...rating,

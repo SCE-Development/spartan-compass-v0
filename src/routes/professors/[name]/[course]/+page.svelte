@@ -4,8 +4,6 @@
 
 	let { data } = $props();
 	let { ratings } = $derived(data);
-
-	console.log(data);
 </script>
 
 <div class="flex w-full flex-col items-center">
