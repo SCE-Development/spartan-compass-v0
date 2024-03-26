@@ -4,7 +4,6 @@
 	import ReviewCard from '$lib/components/Professor Profile/ReviewCard.svelte';
 
 	let { data } = $props();
-	
 </script>
 
 <div class="flex w-full flex-col items-center">
@@ -20,7 +19,7 @@
 			{data.ratings?.length === 1 ? 'Review' : 'Reviews'}
 		</h2>
 		<div class="flex flex-wrap px-2">
-			{#each data.ratings || [] as review}
+			{#each data.ratings as review}
 				<div class="mb-4 w-full px-2">
 					<ReviewCard {review} />
 				</div>

@@ -2,7 +2,6 @@
 	import Avatar from '$lib/components/Professor Profile/Avatar.svelte';
 	import ReviewCard from '$lib/components/Professor Profile/ReviewCard.svelte';
 	let { data } = $props();
-	
 </script>
 
 <div class="flex w-full flex-col items-center">

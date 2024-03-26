@@ -61,7 +61,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const extendedCourses = courses.map((course) => ({
 		...course,
-		averageRating: 0
+		averageRating: undefined as number | undefined
 	}));
 
 	// average ratings for each course
