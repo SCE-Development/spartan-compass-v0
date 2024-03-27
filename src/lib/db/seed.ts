@@ -1,4 +1,4 @@
-import { db } from './db.server';
+import { client, db } from './db.server';
 import {
 	userTable,
 	professorsTable,
@@ -219,8 +219,13 @@ const main = async () => {
 		await db.insert(professorsTable).values(professors);
 		await db.insert(coursesTable).values(courses);
 		await db.insert(professorsCoursesTable).values(professorsCourses);
-		await db.insert(ratingsTable).values(reviews);
-		console.log('Database seeded, press Ctrl+C to exit');
+		await db
+			.insert(ratingsTable)
+			.values(reviews)
+			.finally(() => {
+				console.log('Database seeded successfully');
+				client.end();
+			});
 	} catch (error) {
 		console.error(error);
 		throw new Error('Error seeding database');
