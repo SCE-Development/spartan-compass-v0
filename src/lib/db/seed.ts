@@ -4,12 +4,14 @@ import {
 	professorsTable,
 	coursesTable,
 	professorsCoursesTable,
-	ratingsTable
+	ratingsTable,
+	sessionTable
 } from './schema';
 
 const main = async () => {
 	try {
 		console.log('Seeding database');
+		await db.delete(sessionTable);
 		await db.delete(professorsCoursesTable);
 		await db.delete(ratingsTable);
 		await db.delete(professorsTable);
