@@ -11,7 +11,7 @@
 		classTitle: string | undefined;
 	}
 
-	let { review }: { review: Review[] } = $props();
+	let { review }: { review: Review } = $props();
 </script>
 
 <div class="card w-full bg-base-300 shadow-xl">
