@@ -1,6 +1,18 @@
 <script lang="ts">
 	import ReviewCard from './ReviewCard.svelte';
-	let { ratings } = $props();
+	let { ratings }: { ratings: Review[] } = $props();
+
+	interface Review {
+		id: number;
+		userId: string;
+		professorId: number;
+		rating: number;
+		courseId: number;
+		review: string;
+		createdAt: Date;
+		classNum: string;
+		classTitle: string | undefined;
+	}
 </script>
 
 <div class="flex flex-wrap px-2">
