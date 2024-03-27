@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	{:else}
-		{#each ratings as review (review.id)}
+		{#each ratings as review}
 			<div class="mb-4 w-full px-2">
 				<ReviewCard {review} />
 			</div>

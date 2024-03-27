@@ -211,7 +211,6 @@ const main = async () => {
 				review: 'The course material was too fast-paced.',
 				createdAt: new Date()
 			}
-
 		];
 
 		await db.insert(userTable).values(users);
