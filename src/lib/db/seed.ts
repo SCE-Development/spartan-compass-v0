@@ -202,7 +202,16 @@ const main = async () => {
 				rating: 5,
 				review: 'Engaging lectures and practical assignments.',
 				createdAt: new Date()
+			},
+			{
+				userId: 'user1',
+				professorId: 1,
+				courseId: 1, // Assuming this is another course taught by professor 1
+				rating: 3,
+				review: 'The course material was too fast-paced.',
+				createdAt: new Date()
 			}
+
 		];
 
 		await db.insert(userTable).values(users);
