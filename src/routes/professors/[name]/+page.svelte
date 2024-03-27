@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Courses from '$lib/components/Professor Profile/Courses.svelte';
 	import Avatar from '$lib/components/Professor Profile/Avatar.svelte';
-	import ReviewCard from '$lib/components/Professor Profile/ReviewCard.svelte';
 	import ReviewCardExtended from '$lib/components/Professor Profile/ReviewCardExtended.svelte';
 
 	let { data } = $props();
