@@ -8,5 +8,5 @@ if (!DATABASE_URL) {
 	throw new Error('No url');
 }
 
-const client = postgres(DATABASE_URL);
+export const client = postgres(DATABASE_URL);
 export const db = drizzle(client);
