@@ -27,6 +27,27 @@ const main = async () => {
 				email: 'user1@example.com',
 				googleId: 'someGoogleId1',
 				createdAt: new Date()
+			},
+			{
+				id: 'user2',
+				username: 'SampleUser2',
+				email: 'user2@example.com',
+				googleId: 'someGoogleId2',
+				createdAt: new Date()
+			},
+			{
+				id: 'user3',
+				username: 'SampleUser3',
+				email: 'user3@example.com',
+				googleId: 'someGoogleId2',
+				createdAt: new Date()
+			},
+			{
+				id: 'user4',
+				username: 'SampleUser4',
+				email: 'user4@example.com',
+				googleId: 'someGoogleId4',
+				createdAt: new Date()
 			}
 			// Add more users as needed
 		];
