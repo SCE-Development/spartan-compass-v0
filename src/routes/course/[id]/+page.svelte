@@ -2,6 +2,8 @@
 	let { data } = $props();
 	let course = $derived(data.courseData);
 	let reviews = $derived(data.reviewData);
+	let reviewData = $derived(data.groupedReviews)
+	$inspect(data.groupedReviews);
 </script>
 
 <div>{course.title}</div>

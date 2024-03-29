@@ -1,6 +1,9 @@
 import { db } from '$lib/db/db.server';
 import { coursesTable, professorsTable, ratingsTable } from '$lib/db/schema';
-import { eq, inArray } from 'drizzle-orm';
+import { eq, inArray} from 'drizzle-orm';
+import { unionAll } from 'drizzle-orm/pg-core'
+
+
 
 export const load = async ({ params }) => {
 	const { id } = params;
@@ -24,13 +27,16 @@ export const load = async ({ params }) => {
 			courseId: ratingsTable.courseId
 		})
 		.from(ratingsTable)
-		.where(eq(ratingsTable.courseId, Number(id)));
+		.where(eq(ratingsTable.courseId, Number(id)))
+		
+	
 
 	const professorIds = reviews.map((review) => review.professorId);
 
 	interface Professor {
 		id: number;
 		name: string;
+
 	}
 
 	let professors: Professor[] = [];
@@ -41,9 +47,21 @@ export const load = async ({ params }) => {
 				name: professorsTable.name
 			})
 			.from(professorsTable)
-			.where(inArray(professorsTable.id, professorIds));
+			.where(inArray(professorsTable.id, professorIds))
+			
 	}
 
+	const groupedReviews: { [key: number]: any[] } = reviews.reduce((accumulator, review) => {
+		// Initialize an array for the professor if it doesn't exist
+		if (!accumulator[review.professorId]) {
+			accumulator[review.professorId] = [];
+		}
+		accumulator[review.professorId].push(review);
+
+		return accumulator;
+	}, {} as { [key: number]: any[] });
+
+		
 	const reviewsWithProfessorNames = reviews.map((review) => {
 		const professor = professors.find((professor) => professor.id === review.professorId);
 		return {
@@ -52,8 +70,11 @@ export const load = async ({ params }) => {
 		};
 	});
 
+
+
 	return {
 		courseData: result[0],
-		reviewData: reviewsWithProfessorNames
+		reviewData: reviewsWithProfessorNames,
+		groupedReviews
 	};
 };
