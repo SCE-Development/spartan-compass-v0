@@ -67,15 +67,16 @@ export const load = async ({ params }) => {
 
 	// function that calculates the average rating for each professor, returns map with professorId as key and their average rating as value
 	const averageRatings = (() => {
-		return Object.entries(groupedReviews).reduce(
-			(accumulator, [professorId, reviews]) => {
-				const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-				const averageRating = Math.floor(totalRating / reviews.length); // should averageRating be rounded?
-				accumulator[Number(professorId)] = averageRating;
-				return accumulator;
-			},
-			{} as { [key: number]: number }
-		);
+		const result: { [key: number]: number } = {};
+		for (const [professorId, reviews] of Object.entries(groupedReviews)) {
+			let totalRating = 0;
+			for (const review of reviews) {
+				totalRating += review.rating;
+			}
+			const averageRating = totalRating / reviews.length;
+			result[Number(professorId)] = +averageRating.toFixed(1);
+		}
+		return result;
 	})();
 
 	const reviewsWithProfessorNames = reviews.map((review) => {
