@@ -1,7 +1,6 @@
 import { db } from '$lib/db/db.server';
 import { coursesTable, professorsTable, ratingsTable } from '$lib/db/schema';
-import { eq, inArray} from 'drizzle-orm';
-
+import { eq, inArray } from 'drizzle-orm';
 
 export const load = async ({ params }) => {
 	const { id } = params;
@@ -25,16 +24,13 @@ export const load = async ({ params }) => {
 			courseId: ratingsTable.courseId
 		})
 		.from(ratingsTable)
-		.where(eq(ratingsTable.courseId, Number(id)))
-		
-	
+		.where(eq(ratingsTable.courseId, Number(id)));
 
 	const professorIds = reviews.map((review) => review.professorId);
 
 	interface Professor {
 		id: number;
 		name: string;
-
 	}
 
 	let professors: Professor[] = [];
@@ -45,8 +41,7 @@ export const load = async ({ params }) => {
 				name: professorsTable.name
 			})
 			.from(professorsTable)
-			.where(inArray(professorsTable.id, professorIds))
-			
+			.where(inArray(professorsTable.id, professorIds));
 	}
 
 	interface Review {
@@ -55,31 +50,33 @@ export const load = async ({ params }) => {
 		rating: number;
 		review: string;
 		courseId: number;
-		
 	}
 
 	// returns map of Reviews grouped by professor, key index corresponds to professorId
-	const groupedReviews: { [key: number]: Review[] } = reviews.reduce((accumulator, review) => {
-		if (!accumulator[review.professorId]) {
-			accumulator[review.professorId] = [];
-		}
-		accumulator[review.professorId].push(review);
+	const groupedReviews: { [key: number]: Review[] } = reviews.reduce(
+		(accumulator, review) => {
+			if (!accumulator[review.professorId]) {
+				accumulator[review.professorId] = [];
+			}
+			accumulator[review.professorId].push(review);
 
-		return accumulator;
-	}, {} as { [key: number]: Review[] });
+			return accumulator;
+		},
+		{} as { [key: number]: Review[] }
+	);
 
 	// function that calculates the average rating for each professor, returns map with professorId as key and their average rating as value
 	const averageRatings = (() => {
-		return Object.entries(groupedReviews).reduce((accumulator, [professorId, reviews]) => {
-			const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-			const averageRating = Math.floor(totalRating / reviews.length);
-			accumulator[Number(professorId)] = averageRating;
-			return accumulator;
-		}, {} as { [key: number]: number });
+		return Object.entries(groupedReviews).reduce(
+			(accumulator, [professorId, reviews]) => {
+				const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+				const averageRating = Math.floor(totalRating / reviews.length); // should averageRating be rounded?
+				accumulator[Number(professorId)] = averageRating;
+				return accumulator;
+			},
+			{} as { [key: number]: number }
+		);
 	})();
-
-
-	
 
 	const reviewsWithProfessorNames = reviews.map((review) => {
 		const professor = professors.find((professor) => professor.id === review.professorId);
@@ -88,8 +85,6 @@ export const load = async ({ params }) => {
 			professorName: professor ? professor.name : 'Unknown'
 		};
 	});
-
-
 
 	return {
 		courseData: result[0],

@@ -2,7 +2,7 @@
 	let { data } = $props();
 	let course = $derived(data.courseData);
 	let reviews = $derived(data.reviewData);
-	let reviewData = $derived(data.groupedReviews)
+	let reviewData = $derived(data.groupedReviews);
 	let averageRatings = $derived(data.averageRatings);
 	$inspect(reviewData);
 	$inspect(averageRatings);
