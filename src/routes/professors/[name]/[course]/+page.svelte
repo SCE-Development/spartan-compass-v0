@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Avatar from '$lib/components/Professor Profile/Avatar.svelte';
-	import ReviewCardExtended from '$lib/components/Professor Profile/ReviewCardExtended.svelte';
+	import Reviews from '$lib/components/Professor Profile/Reviews.svelte';
 	let { data } = $props();
 </script>
 
@@ -11,6 +11,6 @@
 			{data.ratings?.length}
 			{data.ratings?.length === 1 ? 'Review' : 'Reviews'}
 		</h2>
-		<ReviewCardExtended ratings={data.ratings} />
+		<Reviews ratings={data.ratings} />
 	</div>
 </div>
