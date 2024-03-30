@@ -21,7 +21,8 @@
 	<div class="card-body">
 		<div class="flex items-center justify-between">
 			<div>
-				<div class="text-2xl font-semibold flex-col text-center">
+				<div class="flex-col text-center text-2xl font-semibold">
+					<!-- will probably have to update to handle longer professor names -->
 					<p>{professorName[0]}</p>
 					<p>{professorName[1]}</p>
 				</div>

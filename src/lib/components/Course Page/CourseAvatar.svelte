@@ -8,10 +8,7 @@
 		description: string | null;
 	}
 	let { course }: { course: Course } = $props();
-	const courseInitials: string = course.title
-		.split(' ')
-		.map((n) => n[0])
-		.join('');
+
 	const courseName: string = `${course.subject}-${course.courseNumber}`;
 </script>
 

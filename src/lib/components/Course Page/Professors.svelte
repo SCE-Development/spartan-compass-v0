@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProfessorCard from "./ProfessorCard.svelte";
+	import ProfessorCard from './ProfessorCard.svelte';
 
 	interface ExtendedProfessor {
 		id: number;
