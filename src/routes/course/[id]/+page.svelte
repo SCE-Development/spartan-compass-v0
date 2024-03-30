@@ -1,25 +1,13 @@
 <script lang="ts">
+	import CourseAvatar from '$lib/components/Course Page/CourseAvatar.svelte';
 	let { data } = $props();
 	let course = $derived(data.courseData);
 	let reviews = $derived(data.reviewData);
 	let professorsWithAverageRatings = $derived(data.professorsWithAverageRatings);
+	$inspect(course)
 	$inspect(professorsWithAverageRatings);
 </script>
 
-<div>{course.title}</div>
-<div>{course.subject}</div>
-<div>{course.courseNumber}</div>
-<div>{course.description}</div>
+<CourseAvatar {course} />
 
-<table class="table">
-	<tbody>
-		{#each reviews as review, i}
-			<tr>
-				<th>{i + 1}</th>
-				<td>{review.professorName}</td>
-				<td>{review.rating}</td>
-				<td>{review.review}</td>
-			</tr>
-		{/each}
-	</tbody>
-</table>
+
