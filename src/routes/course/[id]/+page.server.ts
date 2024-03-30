@@ -21,7 +21,8 @@ export const load = async ({ params }) => {
 			professorId: ratingsTable.professorId,
 			rating: ratingsTable.rating,
 			review: ratingsTable.review,
-			courseId: ratingsTable.courseId
+			courseId: ratingsTable.courseId,
+			createdAt: ratingsTable.createdAt
 		})
 		.from(ratingsTable)
 		.where(eq(ratingsTable.courseId, Number(id)));
@@ -50,6 +51,7 @@ export const load = async ({ params }) => {
 		rating: number;
 		review: string;
 		courseId: number;
+		createdAt: Date;
 	}
 
 	// returns map of Reviews grouped by professor, key index corresponds to professorId
@@ -84,7 +86,9 @@ export const load = async ({ params }) => {
 		const professor = professors.find((professor) => professor.id === review.professorId);
 		return {
 			...review,
-			professorName: professor ? professor.name : 'Unknown'
+			professorName: professor ? professor.name : 'Unknown',
+			courseNumber: result[0].courseNumber,
+			subject: result[0].subject
 		};
 	});
 
