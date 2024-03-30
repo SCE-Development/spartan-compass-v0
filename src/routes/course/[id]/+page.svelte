@@ -3,7 +3,7 @@
 	let course = $derived(data.courseData);
 	let reviews = $derived(data.reviewData);
 	let professorsWithAverageRatings = $derived(data.professorsWithAverageRatings);
-	$inspect(professorsWithAverageRatings)
+	$inspect(professorsWithAverageRatings);
 </script>
 
 <div>{course.title}</div>

@@ -88,19 +88,18 @@ export const load = async ({ params }) => {
 
 	const uniqueProfessors = professors.filter((professor, index, self) => {
 		return index === self.findIndex((t) => t.id === professor.id);
-	})
+	});
 
 	const professorsWithAverageRatings = uniqueProfessors.map((professor) => {
 		return {
 			...professor,
 			averageRating: averageRatings[professor.id]
-		}
-	})
+		};
+	});
 
 	return {
 		courseData: result[0],
 		reviewData: reviewsWithProfessorNames,
 		professorsWithAverageRatings
-		
 	};
 };
