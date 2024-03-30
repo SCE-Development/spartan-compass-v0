@@ -41,7 +41,7 @@ jobs:
         run: bun x prettier --check .
       - name: Lint
         run: bun run lint
-      - name: Start Database
+      - name: Start Postgres Instance
         run: bun run db:dev
       - name: Generate Migration
         run: bun run db:generate
