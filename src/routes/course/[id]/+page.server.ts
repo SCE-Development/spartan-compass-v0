@@ -65,7 +65,8 @@ export const load = async ({ params }) => {
 		{} as { [key: number]: Review[] }
 	);
 
-	// function that calculates the average rating for each professor, returns map with professorId as key and their average rating as value
+	// returns object with average ratings for each professor for the corresponding course
+	// contains professorId, professorName, and averageRating
 	const averageRatings = (() => {
 		const result: { [key: number]: number } = {};
 		for (const [professorId, reviews] of Object.entries(groupedReviews)) {
