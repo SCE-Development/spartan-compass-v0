@@ -19,6 +19,15 @@ jobs:
       GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
       GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
       GOOGLE_REDIRECT_URI: ${{ secrets.GOOGLE_REDIRECT_URI }}
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,3 +41,11 @@ jobs:
         run: bun x prettier --check .
       - name: Lint
         run: bun run lint
+      - name: Start Database
+        run: bun run db:dev
+      - name: Generate Migration
+        run: bun run db:generate
+      - name: Migrate Database
+        run: bun run db:migrate
+      - name: Seed Database
+        run: bun run db:seed
