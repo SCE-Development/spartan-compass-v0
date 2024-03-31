@@ -1,10 +1,8 @@
 <script lang="ts">
 	import CourseAvatar from '$lib/components/Course Page/CourseAvatar.svelte';
 	import Professors from '$lib/components/Course Page/Professors.svelte';
-	import CourseReviews from '$lib/components/Course Page/CourseReviews.svelte';
 	let { data } = $props();
 	let course = $derived(data.courseData);
-	let reviews = $derived(data.reviewData);
 	let professors = $derived(data.professorsWithAverageRatings);
 	$inspect(course);
 	$inspect(professors);
@@ -27,11 +25,6 @@
 				{professors?.length === 1 ? 'Professor' : 'Professors'}
 			</h2>
 			<Professors {professors} />
-			<h2 class="my-4 ml-8 text-2xl font-semibold">
-				{reviews?.length}
-				{reviews?.length === 1 ? 'Review' : 'Reviews'}
-			</h2>
-			<CourseReviews {reviews} />
 		{/if}
 	</div>
 </div>

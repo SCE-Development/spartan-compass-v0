@@ -82,16 +82,6 @@ export const load = async ({ params }) => {
 		return result;
 	})();
 
-	const reviewsWithProfessorNames = reviews.map((review) => {
-		const professor = professors.find((professor) => professor.id === review.professorId);
-		return {
-			...review,
-			professorName: professor ? professor.name : 'Unknown',
-			courseNumber: result[0].courseNumber,
-			subject: result[0].subject
-		};
-	});
-
 	const uniqueProfessors = professors.filter((professor, index, self) => {
 		return index === self.findIndex((t) => t.id === professor.id);
 	});
@@ -105,7 +95,6 @@ export const load = async ({ params }) => {
 
 	return {
 		courseData: result[0],
-		reviewData: reviewsWithProfessorNames,
 		professorsWithAverageRatings
 	};
 };

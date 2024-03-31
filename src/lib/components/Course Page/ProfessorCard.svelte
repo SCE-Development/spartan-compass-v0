@@ -8,13 +8,9 @@
 	}
 
 	let { professor }: { professor: Professor } = $props();
-	let professorName = professor.name.split(' ');
-	let professorNameRoute: string;
-	if (professorName.length > 1) {
-		professorNameRoute = `${professorName[0]}-${professorName[professorName.length - 1]}`;
-	} else {
-		professorNameRoute = professorName[0];
-	}
+	let [firstName, ...rest] = professor.name.split(' ');
+	let lastName = rest.pop() || firstName;
+	let professorNameRoute = `${firstName}-${lastName}`;
 </script>
 
 <div class="card w-full bg-base-300 shadow-xl">
@@ -22,14 +18,13 @@
 		<div class="flex items-center justify-between">
 			<div>
 				<div class="flex-col text-center text-2xl font-semibold">
-					<!-- will probably have to update to handle longer professor names -->
-					<p>{professorName[0]}</p>
-					<p>{professorName[1]}</p>
+					<p>{firstName}</p>
+					<p>{lastName}</p>
 				</div>
 			</div>
 
-			<div class="ml-5">
-				<div class="mb-2 flex h-16 items-center justify-center rounded-md border-2">
+			<div class="ml-2">
+				<div class="mb-2 flex h-24 items-center justify-center rounded-md border-2">
 					<span class="text-4xl">
 						{professor.averageRating ? professor.averageRating : 'N/A'}
 					</span>

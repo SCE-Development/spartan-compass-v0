@@ -29,7 +29,9 @@
 		</div>
 		<div class="flex-col justify-center">
 			<p class="badge rounded-md px-2 py-3">{course.courseNumber}</p>
-			<div class="mt-1 text-2xl font-bold text-neutral">{course.description}</div>
+			{#if course.description}
+				<div class="mt-1 text-2xl font-bold text-neutral">{course.description}</div>
+			{/if}
 		</div>
 	</div>
 </div>
