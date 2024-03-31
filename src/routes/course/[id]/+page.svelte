@@ -15,7 +15,7 @@
 			<div class="card w-full bg-base-300 shadow-xl">
 				<div class="card-body">
 					<div class="flex justify-center text-center">
-						<p class="text-2xl text-gray-400">No professors or reviews yet</p>
+						<p class="text-2xl text-gray-400">No professors yet</p>
 					</div>
 				</div>
 			</div>
