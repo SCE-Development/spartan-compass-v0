@@ -1,8 +1,6 @@
 <script lang="ts">
-	import Search from '$lib/components/Search.svelte';
 	let { data } = $props();
 	let user = $derived(data.user);
-	let formData = $derived(data.form);
 </script>
 
 {#if user}
@@ -10,5 +8,3 @@
 {:else}
 	<h1 class="my-8 flex w-full justify-center text-3xl">Not logged in</h1>
 {/if}
-
-

@@ -1,8 +1,4 @@
 <script lang="ts">
-	import { tick } from 'svelte';
-	import { page } from '$app/stores';
-	import { get } from 'svelte/store';
-
 	import { Menu } from 'lucide-svelte';
 
 	import Login from '$lib/components/Login.svelte';
@@ -10,12 +6,10 @@
 	import Search from '$lib/components/Search.svelte';
 
 	let { user, formData } = $props();
-
 </script>
 
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
-	<a href="/" class="btn btn-ghost text-2xl md:flex">Spartan Compass</a
-	>
+	<a href="/" class="btn btn-ghost text-2xl md:flex">Spartan Compass</a>
 	<Search {formData} />
 
 	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
@@ -28,7 +22,6 @@
 		{/if}
 	</div>
 	<div class="lg:hidden">
-
 		<div class="dropdown dropdown-end">
 			<div tabindex="0" role="button" class="btn btn-ghost">
 				<Menu />
