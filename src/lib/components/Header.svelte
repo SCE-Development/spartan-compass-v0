@@ -3,39 +3,20 @@
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
 
-	import { Menu, Search } from 'lucide-svelte';
+	import { Menu } from 'lucide-svelte';
 
 	import Login from '$lib/components/Login.svelte';
 	import Logout from '$lib/components/Logout.svelte';
+	import Search from '$lib/components/Search.svelte';
 
-	let { user } = $props();
-	let onRoot = $derived(get(page).url.pathname === '/');
+	let { user, formData } = $props();
 
-	let showSearch = $state(false);
-	let searchBox: HTMLInputElement | undefined = $state();
-
-	async function toggleSearch() {
-		showSearch = !showSearch;
-		if (showSearch && searchBox) {
-			await tick();
-			searchBox.focus();
-		}
-	}
 </script>
 
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
-	<a href="/" class="btn btn-ghost text-2xl {showSearch ? 'hidden' : ''} md:flex">Spartan Compass</a
+	<a href="/" class="btn btn-ghost text-2xl md:flex">Spartan Compass</a
 	>
-	{#if !onRoot}
-		<label
-			class="input input-bordered input-accent mx-4 {!showSearch
-				? 'hidden'
-				: ''} h-10 grow justify-between gap-x-2 md:max-w-[35%] lg:flex"
-		>
-			<input class="max-w-full grow" type="text" placeholder="Search" bind:this={searchBox} />
-			<Search class="hidden lg:flex" />
-		</label>
-	{/if}
+	<Search {formData} />
 
 	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
 		<a href="/about" class="btn btn-ghost btn-sm text-lg">About</a>
@@ -47,11 +28,6 @@
 		{/if}
 	</div>
 	<div class="lg:hidden">
-		{#if !onRoot}
-			<div>
-				<button class="btn btn-ghost" on:click={toggleSearch}><Search /> </button>
-			</div>
-		{/if}
 
 		<div class="dropdown dropdown-end">
 			<div tabindex="0" role="button" class="btn btn-ghost">

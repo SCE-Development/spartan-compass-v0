@@ -11,7 +11,4 @@
 	<h1 class="my-8 flex w-full justify-center text-3xl">Not logged in</h1>
 {/if}
 
-<div class="flex justify-center">
-	<Search {formData} />
-</div>
 
