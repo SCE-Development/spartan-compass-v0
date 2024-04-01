@@ -5,6 +5,6 @@
 </script>
 
 <form method="POST" action="/login" use:enhance>
-	<input type="hidden" name="returnUrl" value="{get(page).url.pathname}">
+	<input type="hidden" name="returnUrl" value={get(page).url.pathname} />
 	<slot />
 </form>
