@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { page } from '$app/stores';
-	import { get } from 'svelte/store';
 
 	import { Menu, Search } from 'lucide-svelte';
 
@@ -9,7 +8,6 @@
 	import Logout from '$lib/components/Logout.svelte';
 
 	let { user } = $props();
-	let onRoot = $derived(get(page).url.pathname === '/');
 
 	let showSearch = $state(false);
 	let searchBox: HTMLInputElement | undefined = $state();
@@ -26,7 +24,8 @@
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
 	<a href="/" class="btn btn-ghost text-2xl {showSearch ? 'hidden' : ''} md:flex">Spartan Compass</a
 	>
-	{#if !onRoot}
+	<!-- eslint-disable-next-line svelte/valid-compile -->
+	{#if !($page.url.pathname === '/')}
 		<label
 			class="input input-bordered input-accent mx-4 {!showSearch
 				? 'hidden'
@@ -47,7 +46,8 @@
 		{/if}
 	</div>
 	<div class="lg:hidden">
-		{#if !onRoot}
+		<!-- eslint-disable-next-line svelte/valid-compile -->
+		{#if !($page.url.pathname === '/')}
 			<div>
 				<button class="btn btn-ghost" on:click={toggleSearch}><Search /> </button>
 			</div>
