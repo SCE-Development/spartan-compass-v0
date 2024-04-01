@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 
 	// eslint-disable-next-line svelte/valid-compile
-	let returnUrl = $page.url.pathname;
+	let returnUrl = $derived($page.url.pathname);
 </script>
 
 <form method="POST" action="/login" use:enhance>
