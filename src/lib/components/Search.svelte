@@ -18,17 +18,20 @@
 
 	let { courses, formData }: Props = $props();
 
-	const { form, enhance } = superForm(formData);
+	const { form, enhance } = superForm(formData, {
+		invalidateAll: false,
+		resetForm: false
+	});
 
 	let courseNumbers = $derived(
 		courses
-			.filter((course) => course.subject === ($form.courseName as string))
+			.filter((course) => course.subject === $form.courseName)
 			.map((course) => ({ number: course.courseNumber, title: course.title }))
 	);
 </script>
 
 <form method="POST" action="?/search" class="flex items-center space-x-4" use:enhance>
-	<select name="courseName" bind:value={$form.courseName as string} class="select">
+	<select name="courseName" bind:value={$form.courseName} class="select">
 		<option value="">Select a subject</option>
 		{#each [...new Set(courses.map((course) => course.subject))] as subject}
 			<option value={subject}>{subject}</option>
@@ -37,7 +40,7 @@
 
 	<select
 		name="courseNumber"
-		bind:value={$form.courseNumber as string}
+		bind:value={$form.courseNumber}
 		class="select"
 		disabled={!$form.courseName}
 	>
