@@ -17,20 +17,21 @@
 	<div class="card-body">
 		<div class="flex items-center justify-between text-center">
 			<div>
-				<div class="flex-col text-2xl font-semibold">
+				<div class="flex-col text-3xl font-semibold">
 					<p>{firstName}</p>
 					<p>{lastName}</p>
 				</div>
 			</div>
 
 			<div>
+				<p class="mx-1 mb-1 text-sm">Average Rating</p>
 				<div class="mb-2 flex h-24 items-center justify-center rounded-md border-2">
-					<span class="text-4xl">
+					<span class="text-5xl">
 						{professor.averageRating ? professor.averageRating : 'N/A'}
 					</span>
 				</div>
 				<button
-					class="btn btn-secondary btn-sm"
+					class="btn btn-secondary btn-sm w-full"
 					on:click={() => {
 						goto(`/professors/${professorNameRoute}`);
 					}}

@@ -4,7 +4,6 @@
 	let { data } = $props();
 	let course = $derived(data.courseData);
 	let professors = $derived(data.professorsWithAverageRatings);
-	$inspect(course);
 	$inspect(professors);
 </script>
 
