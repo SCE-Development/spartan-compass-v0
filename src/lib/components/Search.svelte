@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
-	let { formData } = $props();
+	import type { SearchSchema } from '$lib/forms/schema';
+	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
+	let { formData }: { formData: SuperValidated<Infer<SearchSchema>> } = $props();
 	const { form } = superForm(formData as Record<string, unknown>);
 </script>
 

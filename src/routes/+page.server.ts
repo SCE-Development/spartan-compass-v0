@@ -1,15 +1,14 @@
 import { redirect, type Actions, type RequestEvent } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { zod } from 'sveltekit-superforms/adapters';
-import { schema } from '$lib/models/zodSchema.models';
+import { searchSchema } from '$lib/forms/schema';
 import { superValidate } from 'sveltekit-superforms';
 import { db } from '$lib/db/db.server';
 import { coursesTable } from '$lib/db/schema';
 import { and, eq } from 'drizzle-orm';
 
-
 export const load: PageServerLoad = async (event: RequestEvent) => {
-	const form = await superValidate(zod(schema));
+	const form = await superValidate(zod(searchSchema));
 
 	if (event.locals.user) {
 		return {
@@ -23,7 +22,7 @@ export const load: PageServerLoad = async (event: RequestEvent) => {
 
 export const actions: Actions = {
 	search: async (request) => {
-		const form = await superValidate(request, zod(schema));
+		const form = await superValidate(request, zod(searchSchema));
 		const courseName = form.data.courseName;
 		const courseNum = Number(form.data.courseNumber);
 		const courseID = await db
