@@ -1,10 +1,11 @@
 <script lang="ts">
+	import Search from '$lib/components/Search.svelte';
+
 	let { data } = $props();
-	let user = $derived(data.user);
+	let courses = $derived(data.allCourseData);
+	let form = $derived(data.form);
 </script>
 
-{#if user}
-	<h1 class="my-8 flex w-full justify-center text-3xl">Logged in as {user.username}</h1>
-{:else}
-	<h1 class="my-8 flex w-full justify-center text-3xl">Not logged in</h1>
-{/if}
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+	<Search {courses} formData={form} />
+</div>
