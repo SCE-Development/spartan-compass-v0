@@ -1,13 +1,8 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { zod } from 'sveltekit-superforms/adapters';
-import { z } from 'zod';
+import { schema } from '$lib/models/zodSchema.models';
 import { superValidate } from 'sveltekit-superforms';
-
-const schema = z.object({
-	courseName: z.string(),
-	courseNumber: z.string()
-});
 
 export const load: PageServerLoad = async (event: RequestEvent) => {
 	const form = await superValidate(zod(schema));

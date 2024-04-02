@@ -1,16 +1,12 @@
 import { redirect, type Actions, type RequestEvent } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { zod } from 'sveltekit-superforms/adapters';
-import { z } from 'zod';
+import { schema } from '$lib/models/zodSchema.models';
 import { superValidate } from 'sveltekit-superforms';
 import { db } from '$lib/db/db.server';
 import { coursesTable } from '$lib/db/schema';
 import { and, eq } from 'drizzle-orm';
 
-const schema = z.object({
-	courseName: z.string(),
-	courseNumber: z.string()
-});
 
 export const load: PageServerLoad = async (event: RequestEvent) => {
 	const form = await superValidate(zod(schema));
