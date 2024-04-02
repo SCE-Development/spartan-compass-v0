@@ -1,10 +1,18 @@
 import { db } from '$lib/db/db.server';
 import { coursesTable, professorsTable, ratingsTable } from '$lib/db/schema';
-import { eq, inArray } from 'drizzle-orm';
+import { redirect, type Actions } from '@sveltejs/kit';
+import { and, eq, inArray } from 'drizzle-orm';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
+
+const schema = z.object({
+	courseName: z.string(),
+	courseNumber: z.number()
+});
 
 export const load = async ({ params }) => {
 	const { id } = params;
-
 	const result = await db
 		.select({
 			id: coursesTable.id,
@@ -56,4 +64,20 @@ export const load = async ({ params }) => {
 		courseData: result[0],
 		reviewData: reviewsWithProfessorNames
 	};
+};
+
+export const actions: Actions = {
+	search: async (request) => {
+		const form = await superValidate(request, zod(schema));
+		const courseID = await db
+			.select({ id: coursesTable.id })
+			.from(coursesTable)
+			.where(
+				and(
+					eq(coursesTable.subject, form.data.courseName),
+					eq(coursesTable.courseNumber, form.data.courseNumber)
+				)
+			);
+		throw redirect(302, `/course/${courseID[0].id}`);
+	}
 };
