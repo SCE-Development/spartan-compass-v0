@@ -2,7 +2,7 @@
 	import type { SearchSchema } from '$lib/forms/schema';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	let { formData }: { formData: SuperValidated<Infer<SearchSchema>> } = $props();
-	const { form } = superForm(formData as Record<string, unknown>);
+	const { form } = superForm(formData);
 </script>
 
 <form method="POST" action="?/search">
