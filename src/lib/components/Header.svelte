@@ -20,6 +20,7 @@
 
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
 	<a href="/" class="btn btn-ghost text-2xl md:flex">Spartan Compass</a>
+	<!-- eslint-disable-next-line svelte/valid-compile -->
 	{#if $page.url.pathname !== '/'}
 		<Search {courses} {formData} />
 	{/if}
