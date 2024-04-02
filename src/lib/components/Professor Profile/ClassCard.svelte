@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { get } from 'svelte/store';
 	import { goto } from '$app/navigation';
 
 	interface ExtendedCourse {
@@ -31,13 +30,14 @@
 						{course.averageRating ? course.averageRating : 'N/A'}
 					</span>
 				</div>
+				<!-- eslint-disable -->
 				<button
 					class="btn btn-secondary btn-sm"
-					on:click={() =>
-						goto(`${get(page).url.pathname}/${course.subject}-${course.courseNumber}`)}
+					on:click={() => goto(`${$page.url.pathname}/${course.subject}-${course.courseNumber}`)}
 				>
 					Reviews
 				</button>
+				<!-- eslint-enable -->
 			</div>
 		</div>
 	</div>

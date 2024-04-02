@@ -13,6 +13,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 	const state = event.url.searchParams.get('state');
 	const storedState = event.cookies.get('google_state');
 	const storedCodeVerifier = event.cookies.get('code_verifier');
+	const returnUrl = event.cookies.get('return_url');
 
 	if (!code || !state || !storedState || state !== storedState || !storedCodeVerifier) {
 		return new Response('User Cancelled', {
@@ -59,7 +60,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		return new Response('Authenticated', {
 			status: 302,
 			headers: {
-				location: '/'
+				location: returnUrl || '/'
 			}
 		});
 	} catch (e) {

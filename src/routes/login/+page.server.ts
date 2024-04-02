@@ -7,6 +7,8 @@ import type { Actions } from './$types';
 
 export const actions: Actions = {
 	default: async (event) => {
+		const formData = await event.request.formData();
+		const returnUrl = (formData.get('returnUrl') as string) || '/';
 		const state = generateState();
 		const codeVerifier = generateCodeVerifier();
 		const url = await googleAuth.createAuthorizationURL(state, codeVerifier, {
@@ -21,6 +23,13 @@ export const actions: Actions = {
 		});
 
 		event.cookies.set('code_verifier', codeVerifier, {
+			path: '/',
+			secure: !dev,
+			httpOnly: true,
+			maxAge: 60 * 10
+		});
+
+		event.cookies.set('return_url', returnUrl, {
 			path: '/',
 			secure: !dev,
 			httpOnly: true,
