@@ -4,10 +4,11 @@
 
 	let { data } = $props();
 	let user = $derived(data.user);
-	let formData = $derived(data.form.data);
+	let courses = $derived(data.allCourseData);
+	let formData = $derived(data.form);
 </script>
 
 <div data-theme="dracula">
-	<Header {user} {formData} />
+	<Header {courses} {formData} {user} />
 	<slot />
 </div>
