@@ -4,3 +4,4 @@ export const schema = z.object({
 	courseName: z.string(),
 	courseNumber: z.string()
 });
+

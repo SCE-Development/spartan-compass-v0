@@ -4,7 +4,7 @@
 
 	let { data } = $props();
 	let user = $derived(data.user);
-	let formData = $derived(data.form);
+	let formData = $derived(data.form.data);
 </script>
 
 <div data-theme="dracula">

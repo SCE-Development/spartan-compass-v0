@@ -1,11 +1,22 @@
 <script lang="ts">
+	import { z } from 'zod';
 	import { Menu } from 'lucide-svelte';
 
 	import Login from '$lib/components/Login.svelte';
 	import Logout from '$lib/components/Logout.svelte';
 	import Search from '$lib/components/Search.svelte';
 
-	let { user, formData } = $props();
+	import { schema } from '$lib/models/zodSchema.models';
+
+	type SearchForm = z.infer<typeof schema>;
+
+	interface User {
+		username: string;
+		google_id: number;
+		id: string;
+	};
+
+	let { user, formData }: { user: User | undefined, formData: SearchForm } = $props();
 </script>
 
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
