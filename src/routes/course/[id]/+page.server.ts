@@ -29,7 +29,8 @@ export const load = async ({ params }) => {
 			professorId: ratingsTable.professorId,
 			rating: ratingsTable.rating,
 			review: ratingsTable.review,
-			courseId: ratingsTable.courseId
+			courseId: ratingsTable.courseId,
+			createdAt: ratingsTable.createdAt
 		})
 		.from(ratingsTable)
 		.where(eq(ratingsTable.courseId, Number(id)));
@@ -52,17 +53,56 @@ export const load = async ({ params }) => {
 			.where(inArray(professorsTable.id, professorIds));
 	}
 
-	const reviewsWithProfessorNames = reviews.map((review) => {
-		const professor = professors.find((professor) => professor.id === review.professorId);
+	interface Review {
+		userId: string;
+		professorId: number;
+		rating: number;
+		review: string;
+		courseId: number;
+		createdAt: Date;
+	}
+
+	// returns map of Reviews grouped by professor, key index corresponds to professorId
+	const groupedReviews: { [key: number]: Review[] } = reviews.reduce(
+		(accumulator, review) => {
+			if (!accumulator[review.professorId]) {
+				accumulator[review.professorId] = [];
+			}
+			accumulator[review.professorId].push(review);
+
+			return accumulator;
+		},
+		{} as { [key: number]: Review[] }
+	);
+
+	// returns map of average ratings by professorId
+	const averageRatings = (() => {
+		const result: { [professorId: number]: number } = {};
+		for (const [professorId, reviews] of Object.entries(groupedReviews)) {
+			let totalRating = 0;
+			for (const review of reviews) {
+				totalRating += review.rating;
+			}
+			const averageRating = totalRating / reviews.length;
+			result[Number(professorId)] = +averageRating.toFixed(1);
+		}
+		return result;
+	})();
+
+	const uniqueProfessors = professors.filter((professor, index, self) => {
+		return index === self.findIndex((t) => t.id === professor.id);
+	});
+
+	const professorsWithAverageRatings = uniqueProfessors.map((professor) => {
 		return {
-			...review,
-			professorName: professor ? professor.name : 'Unknown'
+			...professor,
+			averageRating: averageRatings[professor.id]
 		};
 	});
 
 	return {
 		courseData: result[0],
-		reviewData: reviewsWithProfessorNames
+		professorsWithAverageRatings
 	};
 };
 

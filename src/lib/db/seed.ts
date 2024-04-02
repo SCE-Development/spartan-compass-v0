@@ -27,6 +27,27 @@ const main = async () => {
 				email: 'user1@example.com',
 				googleId: 'someGoogleId1',
 				createdAt: new Date()
+			},
+			{
+				id: 'user2',
+				username: 'SampleUser2',
+				email: 'user2@example.com',
+				googleId: 'someGoogleId2',
+				createdAt: new Date()
+			},
+			{
+				id: 'user3',
+				username: 'SampleUser3',
+				email: 'user3@example.com',
+				googleId: 'someGoogleId2',
+				createdAt: new Date()
+			},
+			{
+				id: 'user4',
+				username: 'SampleUser4',
+				email: 'user4@example.com',
+				googleId: 'someGoogleId4',
+				createdAt: new Date()
 			}
 			// Add more users as needed
 		];
@@ -140,6 +161,30 @@ const main = async () => {
 		];
 
 		const reviews = [
+			{
+				userId: 'user2',
+				professorId: 1,
+				courseId: 1,
+				rating: 4,
+				review: 'Helpful and engaging professor.',
+				createdAt: new Date()
+			},
+			{
+				userId: 'user3',
+				professorId: 1,
+				courseId: 1,
+				rating: 5,
+				review: 'This guy is awesome!',
+				createdAt: new Date()
+			},
+			{
+				userId: 'user4',
+				professorId: 1,
+				courseId: 1,
+				rating: 3,
+				review: 'This class is too hard!',
+				createdAt: new Date()
+			},
 			{
 				userId: 'user1',
 				professorId: 1,
