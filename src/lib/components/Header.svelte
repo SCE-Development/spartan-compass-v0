@@ -1,40 +1,19 @@
 <script lang="ts">
-	import { tick } from 'svelte';
-	import { page } from '$app/stores';
-
-	import { Menu, Search } from 'lucide-svelte';
+	import { Menu } from 'lucide-svelte';
 
 	import Login from '$lib/components/Login.svelte';
 	import Logout from '$lib/components/Logout.svelte';
+	import Search from '$lib/components/Search.svelte';
+	import type { User } from 'lucia';
+	import type { Infer, SuperValidated } from 'sveltekit-superforms';
+	import type { SearchSchema } from '$lib/forms/schema';
 
-	let { user } = $props();
-
-	let showSearch = $state(false);
-	let searchBox: HTMLInputElement | undefined = $state();
-
-	async function toggleSearch() {
-		showSearch = !showSearch;
-		if (showSearch && searchBox) {
-			await tick();
-			searchBox.focus();
-		}
-	}
+	let { user, formData }: { user: User; formData: SuperValidated<Infer<SearchSchema>> } = $props();
 </script>
 
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
-	<a href="/" class="btn btn-ghost text-2xl {showSearch ? 'hidden' : ''} md:flex">Spartan Compass</a
-	>
-	<!-- eslint-disable-next-line svelte/valid-compile -->
-	{#if !($page.url.pathname === '/')}
-		<label
-			class="input input-bordered input-accent mx-4 {!showSearch
-				? 'hidden'
-				: ''} h-10 grow justify-between gap-x-2 md:max-w-[35%] lg:flex"
-		>
-			<input class="max-w-full grow" type="text" placeholder="Search" bind:this={searchBox} />
-			<Search class="hidden lg:flex" />
-		</label>
-	{/if}
+	<a href="/" class="btn btn-ghost text-2xl md:flex">Spartan Compass</a>
+	<Search {formData} />
 
 	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
 		<a href="/about" class="btn btn-ghost btn-sm text-lg">About</a>
@@ -46,13 +25,6 @@
 		{/if}
 	</div>
 	<div class="lg:hidden">
-		<!-- eslint-disable-next-line svelte/valid-compile -->
-		{#if !($page.url.pathname === '/')}
-			<div>
-				<button class="btn btn-ghost" on:click={toggleSearch}><Search /> </button>
-			</div>
-		{/if}
-
 		<div class="dropdown dropdown-end">
 			<div tabindex="0" role="button" class="btn btn-ghost">
 				<Menu />

@@ -12,17 +12,15 @@
 </script>
 
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
-
-	let { courses, formData }: { courses: Course[]; formData?: Record<string, unknown> } = $props();
-
-	const { form, enhance } = superForm(formData as Record<string, unknown>);
-
-	let courseNumbers = $derived(
-		courses
-			.filter((course) => course.subject === ($form.courseName as string))
-			.map((course) => ({ number: course.courseNumber, title: course.title }))
-	);
+	import type { SearchSchema } from '$lib/forms/schema';
+	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
+	let { courses, formData }: { courses: Course[], formData: SuperValidated<Infer<SearchSchema>> } = $props();
+	const { form } = superForm(formData);
+  let courseNumbers = $derived(
+      courses
+        .filter((course) => course.subject === ($form.courseName as string))
+        .map((course) => ({ number: course.courseNumber, title: course.title }))
+    );
 </script>
 
 <form method="POST" action="?/search" class="flex items-center space-x-4" use:enhance>
