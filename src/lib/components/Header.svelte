@@ -3,17 +3,23 @@
 
 	import Login from '$lib/components/Login.svelte';
 	import Logout from '$lib/components/Logout.svelte';
-	import Search from '$lib/components/Search.svelte';
+	import Search, { type Course } from '$lib/components/Search.svelte';
 	import type { User } from 'lucia';
 	import type { Infer, SuperValidated } from 'sveltekit-superforms';
 	import type { SearchSchema } from '$lib/forms/schema';
 
-	let { user, formData }: { user: User; formData: SuperValidated<Infer<SearchSchema>> } = $props();
+	type Props = {
+		user: User;
+		formData: SuperValidated<Infer<SearchSchema>>;
+		courses: Course[];
+	};
+
+	let { user, formData, courses }: Props = $props();
 </script>
 
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
 	<a href="/" class="btn btn-ghost text-2xl md:flex">Spartan Compass</a>
-	<Search {formData} />
+	<Search {courses} {formData} />
 
 	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
 		<a href="/about" class="btn btn-ghost btn-sm text-lg">About</a>

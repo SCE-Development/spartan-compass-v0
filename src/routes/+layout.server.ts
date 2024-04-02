@@ -4,9 +4,8 @@ import type { PageServerLoad } from './$types';
 import { db } from '$lib/db/db.server';
 import { coursesTable } from '$lib/db/schema';
 import { asc } from 'drizzle-orm';
-import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters'; 
+import { zod } from 'sveltekit-superforms/adapters';
 import { searchSchema } from '$lib/forms/schema';
 
 export const load: PageServerLoad = async (event: RequestEvent) => {
@@ -29,6 +28,5 @@ export const load: PageServerLoad = async (event: RequestEvent) => {
 			allCourseData: result
 		};
 	}
-
 	return { form, allCourseData: result };
 };
