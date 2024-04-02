@@ -5,26 +5,33 @@
 		subject: string;
 		courseNumber: number;
 	}
-	// export const schema = z.object({
-	// courseName: z.string(),
-	// courseNumber: z.number()
-	// });
 </script>
 
 <script lang="ts">
 	import type { SearchSchema } from '$lib/forms/schema';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
-	let { courses, formData }: { courses: Course[], formData: SuperValidated<Infer<SearchSchema>> } = $props();
-	const { form } = superForm(formData);
-  let courseNumbers = $derived(
-      courses
-        .filter((course) => course.subject === ($form.courseName as string))
-        .map((course) => ({ number: course.courseNumber, title: course.title }))
-    );
+
+	interface Props {
+		courses: Course[];
+		formData: SuperValidated<Infer<SearchSchema>>;
+	}
+
+	let { courses, formData }: Props = $props();
+
+	const { form, enhance } = superForm(formData, {
+		invalidateAll: false,
+		resetForm: false
+	});
+
+	let courseNumbers = $derived(
+		courses
+			.filter((course) => course.subject === $form.courseName)
+			.map((course) => ({ number: course.courseNumber, title: course.title }))
+	);
 </script>
 
 <form method="POST" action="?/search" class="flex items-center space-x-4" use:enhance>
-	<select name="courseName" bind:value={$form.courseName as string} class="select">
+	<select name="courseName" bind:value={$form.courseName} class="select">
 		<option value="">Select a subject</option>
 		{#each [...new Set(courses.map((course) => course.subject))] as subject}
 			<option value={subject}>{subject}</option>
@@ -33,7 +40,7 @@
 
 	<select
 		name="courseNumber"
-		bind:value={$form.courseNumber as string}
+		bind:value={$form.courseNumber}
 		class="select"
 		disabled={!$form.courseName}
 	>
