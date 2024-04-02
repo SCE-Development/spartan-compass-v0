@@ -12,25 +12,16 @@
 </script>
 
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { superForm } from 'sveltekit-superforms';
 
 	let { courses, formData }: { courses: Course[]; formData?: Record<string, unknown> } = $props();
 
-	const { form } = superForm(formData as Record<string, unknown>);
+	const { form, enhance } = superForm(formData as Record<string, unknown>);
 
 	let courseNumbers = $derived(
 		courses
 			.filter((course) => course.subject === ($form.courseName as string))
 			.map((course) => ({ number: course.courseNumber, title: course.title }))
-	);
-
-	let selectedCourseId = $derived(
-		courses.find(
-			(course) =>
-				course.subject === $form.courseName &&
-				course.courseNumber === ($form.courseNumber as number)
-		)?.id
 	);
 </script>
 
@@ -38,11 +29,7 @@
 	method="POST"
 	action="?/search"
 	class="flex items-center space-x-4"
-	use:enhance={() => {
-		return async ({ update }) => {
-			update({ reset: false });
-		};
-	}}
+	use:enhance
 >
 	<select name="courseName" bind:value={$form.courseName as string} class="select">
 		<option value="">Select a subject</option>
@@ -62,10 +49,6 @@
 			<option value={number}>{number} - {title}</option>
 		{/each}
 	</select>
-
-	{#if selectedCourseId}
-		<input type="hidden" name="courseId" value={selectedCourseId} />
-	{/if}
 
 	<button class="btn" type="submit" disabled={!$form.courseNumber}>Search</button>
 </form>
