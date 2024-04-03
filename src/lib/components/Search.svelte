@@ -30,7 +30,7 @@
 	);
 </script>
 
-<form method="POST" action="?/search" class="flex items-center space-x-4" use:enhance>
+<form method="POST" action="/?/search" class="flex items-center space-x-4" use:enhance>
 	<select name="courseName" bind:value={$form.courseName} class="select">
 		<option value="">Select a subject</option>
 		{#each [...new Set(courses.map((course) => course.subject))] as subject}
