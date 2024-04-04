@@ -10,10 +10,8 @@
 	let { professors }: { professors: ExtendedProfessor[] } = $props();
 </script>
 
-<div class="flex w-full flex-wrap px-2">
+<div class="3xl:grid-cols-4 grid grid-cols-1 gap-4 px-2 sm:grid-cols-2 lg:grid-cols-3">
 	{#each professors as professor}
-		<div class="mb-4 w-full px-2 md:w-1/2 xl:w-1/3">
-			<ProfessorCard {professor} />
-		</div>
+		<ProfessorCard {professor} />
 	{/each}
 </div>

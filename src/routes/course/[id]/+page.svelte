@@ -8,7 +8,7 @@
 
 <div class="flex w-full flex-col items-center">
 	<CourseAvatar {course} />
-	<div class="xl:w-3/4">
+	<div class="w-full xl:w-3/4">
 		{#if professors.length === 0}
 			<div class="card w-full bg-base-300 shadow-xl">
 				<div class="card-body">

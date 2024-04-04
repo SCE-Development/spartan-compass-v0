@@ -15,7 +15,7 @@
 
 <div class="card w-full bg-base-300 shadow-xl">
 	<div class="card-body">
-		<div class="flex items-center justify-between text-center">
+		<div class="flex items-center justify-between space-x-5 text-center">
 			<div>
 				<div class="flex-col text-3xl font-semibold">
 					<p>{firstName}</p>
