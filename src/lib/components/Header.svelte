@@ -10,7 +10,7 @@
 	import { page } from '$app/stores';
 
 	type Props = {
-		user: User;
+		user: User | undefined;
 		formData: SuperValidated<Infer<SearchSchema>>;
 		courses: Course[];
 	};
