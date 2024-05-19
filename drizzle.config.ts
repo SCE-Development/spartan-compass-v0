@@ -11,8 +11,8 @@ export default {
 	dialect: 'postgresql',
 	out: './src/lib/db/migrations',
 	migration: {
-		table: "migrations",
-		schema: "public"
+		table: 'migrations',
+		schema: 'public'
 	},
 	driver: 'pg',
 	dbCredentials: {
