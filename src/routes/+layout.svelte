@@ -2,7 +2,7 @@
 	import '../app.pcss';
 	import Header from '$lib/components/Header.svelte';
 
-	let { data } = $props();
+	let { data, children } = $props();
 	let user = $derived(data.user);
 	let courses = $derived(data.allCourseData);
 	let formData = $derived(data.form);
@@ -10,5 +10,5 @@
 
 <div data-theme="dracula">
 	<Header {courses} {formData} {user} />
-	<slot />
+	{@render children()}
 </div>
