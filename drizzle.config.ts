@@ -14,7 +14,6 @@ export default {
 		table: 'migrations',
 		schema: 'public'
 	},
-	driver: 'pg',
 	dbCredentials: {
 		url: DATABASE_URL
 	}
