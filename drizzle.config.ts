@@ -10,6 +10,10 @@ export default {
 	schema: './src/lib/db/schema.ts',
 	dialect: 'postgresql',
 	out: './src/lib/db/migrations',
+	migration: {
+		table: "migrations",
+		schema: "public"
+	},
 	driver: 'pg',
 	dbCredentials: {
 		url: DATABASE_URL
