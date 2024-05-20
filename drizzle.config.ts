@@ -8,9 +8,13 @@ if (!DATABASE_URL) {
 }
 export default {
 	schema: './src/lib/db/schema.ts',
+	dialect: 'postgresql',
 	out: './src/lib/db/migrations',
-	driver: 'pg',
+	migration: {
+		table: 'migrations',
+		schema: 'public'
+	},
 	dbCredentials: {
-		connectionString: DATABASE_URL
+		url: DATABASE_URL
 	}
 } as Config;

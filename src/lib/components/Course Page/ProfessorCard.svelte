@@ -32,7 +32,7 @@
 				</div>
 				<button
 					class="btn btn-secondary btn-sm w-full"
-					on:click={() => {
+					onclick={() => {
 						goto(`/professors/${professorNameRoute}`);
 					}}
 				>
