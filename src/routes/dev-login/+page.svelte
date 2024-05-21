@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
 </script>
 
@@ -17,7 +17,7 @@
 					}
 					if (result.type ==="redirect") {
 						toast.success('Created account')
-						goto(result.location)
+						window.location = result.location
 					}
 				};
 			}}
