@@ -29,8 +29,7 @@
 		{#if user}
 			<Logout><button type="submit" class="btn btn-accent btn-sm text-lg">Log Out</button></Logout>
 		{:else if dev}
-			<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Log In</a>
-			<a href="/dev-login" class="btn btn-accent btn-sm text-lg">Sign Up</a>
+			<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Dev Login</a>
 		{:else}
 			<Login><button type="submit" class="btn btn-ghost btn-sm text-lg">Log In</button></Login>
 			<Login><button type="submit" class="btn btn-accent btn-sm text-lg">Sign Up</button></Login>
@@ -48,8 +47,7 @@
 				{#if user}
 					<li><Logout><button type="submit" class="text-lg">Log Out</button></Logout></li>
 				{:else if dev}
-					<li><a href="/dev-login" class="text-lg">Log In</a></li>
-					<li><a href="/dev-login" class="text-lg">Sign Up</a></li>
+					<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Dev Login</a>
 				{:else}
 					<div>
 						<li>
