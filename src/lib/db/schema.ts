@@ -11,9 +11,9 @@ import {
 
 export const userTable = pgTable('users', {
 	id: varchar('id', { length: 15 }).primaryKey(),
-	username: text('username').notNull(),
+	username: text('username').notNull().unique(),
 	email: text('email').notNull(),
-	googleId: varchar('googleId', { length: 21 }).notNull(),
+	googleId: varchar('googleId', { length: 21 }),
 	createdAt: timestamp('createdAt').notNull()
 });
 

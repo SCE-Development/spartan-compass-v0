@@ -15,6 +15,13 @@
       "when": 1710663068167,
       "tag": "0001_nebulous_wrecker",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1716303744119,
+      "tag": "0002_brave_hannibal_king",
+      "breakpoints": true
     }
   ]
 }

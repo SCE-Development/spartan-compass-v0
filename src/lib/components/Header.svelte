@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Menu } from 'lucide-svelte';
-
 	import Login from '$lib/components/Login.svelte';
 	import Logout from '$lib/components/Logout.svelte';
 	import Search, { type Course } from '$lib/components/Search.svelte';
@@ -8,6 +7,7 @@
 	import type { Infer, SuperValidated } from 'sveltekit-superforms';
 	import type { SearchSchema } from '$lib/forms/schema';
 	import { page } from '$app/stores';
+	import { dev } from '$app/environment';
 
 	type Props = {
 		user: User | undefined;
@@ -28,6 +28,9 @@
 		<a href="/about" class="btn btn-ghost btn-sm text-lg">About</a>
 		{#if user}
 			<Logout><button type="submit" class="btn btn-accent btn-sm text-lg">Log Out</button></Logout>
+		{:else if dev}
+			<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Log In</a>
+			<a href="/dev-login" class="btn btn-accent btn-sm text-lg">Sign Up</a>
 		{:else}
 			<Login><button type="submit" class="btn btn-ghost btn-sm text-lg">Log In</button></Login>
 			<Login><button type="submit" class="btn btn-accent btn-sm text-lg">Sign Up</button></Login>
@@ -44,6 +47,9 @@
 				<li><a href="/about" class="text-lg">About</a></li>
 				{#if user}
 					<li><Logout><button type="submit" class="text-lg">Log Out</button></Logout></li>
+				{:else if dev}
+					<li><a href="/dev-login" class="text-lg">Log In</a></li>
+					<li><a href="/dev-login" class="text-lg">Sign Up</a></li>
 				{:else}
 					<div>
 						<li>

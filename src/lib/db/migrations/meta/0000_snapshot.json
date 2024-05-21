@@ -1,10 +1,8 @@
 {
-  "id": "87a17e63-1308-43ff-bbc8-da953cd416c7",
-  "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "courses": {
+    "public.courses": {
       "name": "courses",
       "schema": "",
       "columns": {
@@ -44,7 +42,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "professors_courses": {
+    "public.professors_courses": {
       "name": "professors_courses",
       "schema": "",
       "columns": {
@@ -66,28 +64,28 @@
         "professors_courses_professor_id_professors_id_fk": {
           "name": "professors_courses_professor_id_professors_id_fk",
           "tableFrom": "professors_courses",
-          "tableTo": "professors",
           "columnsFrom": [
             "professor_id"
           ],
+          "tableTo": "professors",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "professors_courses_course_id_courses_id_fk": {
           "name": "professors_courses_course_id_courses_id_fk",
           "tableFrom": "professors_courses",
-          "tableTo": "courses",
           "columnsFrom": [
             "course_id"
           ],
+          "tableTo": "courses",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {
@@ -101,7 +99,7 @@
       },
       "uniqueConstraints": {}
     },
-    "professors": {
+    "public.professors": {
       "name": "professors",
       "schema": "",
       "columns": {
@@ -129,7 +127,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "reviews": {
+    "public.reviews": {
       "name": "reviews",
       "schema": "",
       "columns": {
@@ -175,47 +173,47 @@
         "reviews_userId_users_id_fk": {
           "name": "reviews_userId_users_id_fk",
           "tableFrom": "reviews",
-          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "reviews_professor_id_professors_id_fk": {
           "name": "reviews_professor_id_professors_id_fk",
           "tableFrom": "reviews",
-          "tableTo": "professors",
           "columnsFrom": [
             "professor_id"
           ],
+          "tableTo": "professors",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "reviews_course_id_courses_id_fk": {
           "name": "reviews_course_id_courses_id_fk",
           "tableFrom": "reviews",
-          "tableTo": "courses",
           "columnsFrom": [
             "course_id"
           ],
+          "tableTo": "courses",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "sessions": {
+    "public.sessions": {
       "name": "sessions",
       "schema": "",
       "columns": {
@@ -243,21 +241,21 @@
         "sessions_userId_users_id_fk": {
           "name": "sessions_userId_users_id_fk",
           "tableFrom": "sessions",
-          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users": {
+    "public.users": {
       "name": "users",
       "schema": "",
       "columns": {
@@ -301,8 +299,10 @@
   "enums": {},
   "schemas": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
-  }
+    "tables": {},
+    "columns": {}
+  },
+  "id": "87a17e63-1308-43ff-bbc8-da953cd416c7",
+  "prevId": "00000000-0000-0000-0000-000000000000"
 }

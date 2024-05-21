@@ -1,4 +1,6 @@
 {
+  "id": "e16d9c78-3728-4526-a427-25b28b31504c",
+  "prevId": "c9231266-d403-451e-9bf5-4d778545c19e",
   "version": "6",
   "dialect": "postgresql",
   "tables": {
@@ -64,28 +66,28 @@
         "professors_courses_professor_id_professors_id_fk": {
           "name": "professors_courses_professor_id_professors_id_fk",
           "tableFrom": "professors_courses",
+          "tableTo": "professors",
           "columnsFrom": [
             "professor_id"
           ],
-          "tableTo": "professors",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
         "professors_courses_course_id_courses_id_fk": {
           "name": "professors_courses_course_id_courses_id_fk",
           "tableFrom": "professors_courses",
+          "tableTo": "courses",
           "columnsFrom": [
             "course_id"
           ],
-          "tableTo": "courses",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
@@ -179,41 +181,41 @@
         "reviews_userId_users_id_fk": {
           "name": "reviews_userId_users_id_fk",
           "tableFrom": "reviews",
+          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
         "reviews_professor_id_professors_id_fk": {
           "name": "reviews_professor_id_professors_id_fk",
           "tableFrom": "reviews",
+          "tableTo": "professors",
           "columnsFrom": [
             "professor_id"
           ],
-          "tableTo": "professors",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
         "reviews_course_id_courses_id_fk": {
           "name": "reviews_course_id_courses_id_fk",
           "tableFrom": "reviews",
+          "tableTo": "courses",
           "columnsFrom": [
             "course_id"
           ],
-          "tableTo": "courses",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -247,15 +249,15 @@
         "sessions_userId_users_id_fk": {
           "name": "sessions_userId_users_id_fk",
           "tableFrom": "sessions",
+          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -287,7 +289,7 @@
           "name": "googleId",
           "type": "varchar(21)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "createdAt": {
           "name": "createdAt",
@@ -299,16 +301,22 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "users_username_unique": {
+          "name": "users_username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username"
+          ]
+        }
+      }
     }
   },
   "enums": {},
   "schemas": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "id": "c9231266-d403-451e-9bf5-4d778545c19e",
-  "prevId": "87a17e63-1308-43ff-bbc8-da953cd416c7"
+    "tables": {}
+  }
 }
