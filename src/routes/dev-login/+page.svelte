@@ -22,15 +22,6 @@
 				};
 			}}
 		>
-			<label class="block text-sm font-medium" for="username">Username</label>
-			<input
-				id="username"
-				class="input input-secondary mt-1 w-full"
-				type="text"
-				name="username"
-				placeholder="Enter your username"
-				required
-			/>
 			<label class="block text-sm font-medium" for="email">Email</label>
 			<input
 				id="email"

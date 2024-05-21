@@ -7,15 +7,14 @@ import { generateId } from 'lucia';
 export const actions = {
 	default: async (event) => {
 		const formData = await event.request.formData();
-		const formUsername = String(formData.get('username'));
 		const formEmail = String(formData.get('email'));
-		console.log(formUsername);
+
 		const userId = generateId(15);
 
 		try {
 			await db.insert(userTable).values({
 				id: userId,
-				username: formUsername,
+				username: formEmail,
 				email: formEmail,
 				createdAt: new Date()
 			});
