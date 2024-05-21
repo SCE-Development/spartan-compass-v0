@@ -4,23 +4,9 @@
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1710649139984,
-      "tag": "0000_steady_ken_ellis",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1710663068167,
-      "tag": "0001_nebulous_wrecker",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
       "version": "6",
-      "when": 1716303744119,
-      "tag": "0002_brave_hannibal_king",
+      "when": 1716304760358,
+      "tag": "0000_wise_amphibian",
       "breakpoints": true
     }
   ]
