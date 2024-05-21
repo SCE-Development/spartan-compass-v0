@@ -25,7 +25,7 @@
 		<Search {courses} {formData} />
 	{/if}
 	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
-		<a href="/about" class="btn btn-ghost btn-sm text-lg">About</a>
+		<a href="/account" class="btn btn-ghost btn-sm text-lg">My Account</a>
 		{#if user}
 			<Logout><button type="submit" class="btn btn-accent btn-sm text-lg">Log Out</button></Logout>
 		{:else if dev}
