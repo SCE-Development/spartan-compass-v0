@@ -49,7 +49,6 @@ const main = async () => {
 				googleId: 'someGoogleId4',
 				createdAt: new Date()
 			}
-			// Add more users as needed
 		];
 		const professors = [
 			{ id: 1, name: 'John Smith', department: 'Mathematics' },
@@ -156,8 +155,8 @@ const main = async () => {
 			{ professorId: 5, courseId: 2 },
 			{ professorId: 5, courseId: 5 },
 			{ professorId: 5, courseId: 8 },
-			{ professorId: 7, courseId: 10 }, // COMPSCI professor teaching COMPSCI course
-			{ professorId: 8, courseId: 11 } // Engineering professor teaching ENG course
+			{ professorId: 7, courseId: 10 },
+			{ professorId: 8, courseId: 11 }
 		];
 
 		const reviews = [
@@ -220,7 +219,7 @@ const main = async () => {
 			{
 				userId: 'user1',
 				professorId: 1,
-				courseId: 7, // Assuming this is another course taught by professor 1
+				courseId: 7,
 				rating: 2,
 				review: 'Challenging material, but could use more examples.',
 				createdAt: new Date()
@@ -228,16 +227,15 @@ const main = async () => {
 			{
 				userId: 'user1',
 				professorId: 1,
-				courseId: 4, // Assuming this is another course taught by professor 1
+				courseId: 4,
 				rating: 4,
 				review: 'Well-structured course with clear objectives.',
 				createdAt: new Date()
 			},
-			// Additional reviews for professorId 2
 			{
 				userId: 'user1',
 				professorId: 2,
-				courseId: 5, // Assuming this is another course taught by professor 2
+				courseId: 5,
 				rating: 1,
 				review: 'The course content was outdated.',
 				createdAt: new Date()
@@ -245,7 +243,7 @@ const main = async () => {
 			{
 				userId: 'user1',
 				professorId: 2,
-				courseId: 8, // Assuming this is another course taught by professor 2
+				courseId: 8,
 				rating: 5,
 				review: 'Engaging lectures and practical assignments.',
 				createdAt: new Date()
@@ -253,7 +251,7 @@ const main = async () => {
 			{
 				userId: 'user1',
 				professorId: 1,
-				courseId: 1, // Assuming this is another course taught by professor 1
+				courseId: 1,
 				rating: 3,
 				review: 'The course material was too fast-paced.',
 				createdAt: new Date()

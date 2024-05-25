@@ -1,10 +1,10 @@
 {
-  "id": "87a17e63-1308-43ff-bbc8-da953cd416c7",
+  "id": "5e051c57-44aa-47d6-9896-44fc4180217e",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "courses": {
+    "public.courses": {
       "name": "courses",
       "schema": "",
       "columns": {
@@ -44,7 +44,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "professors_courses": {
+    "public.professors_courses": {
       "name": "professors_courses",
       "schema": "",
       "columns": {
@@ -101,7 +101,7 @@
       },
       "uniqueConstraints": {}
     },
-    "professors": {
+    "public.professors": {
       "name": "professors",
       "schema": "",
       "columns": {
@@ -129,10 +129,16 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "reviews": {
+    "public.reviews": {
       "name": "reviews",
       "schema": "",
       "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
         "userId": {
           "name": "userId",
           "type": "varchar",
@@ -215,7 +221,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "sessions": {
+    "public.sessions": {
       "name": "sessions",
       "schema": "",
       "columns": {
@@ -257,7 +263,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users": {
+    "public.users": {
       "name": "users",
       "schema": "",
       "columns": {
@@ -283,7 +289,7 @@
           "name": "googleId",
           "type": "varchar(21)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "createdAt": {
           "name": "createdAt",
@@ -295,7 +301,15 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "users_username_unique": {
+          "name": "users_username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username"
+          ]
+        }
+      }
     }
   },
   "enums": {},
