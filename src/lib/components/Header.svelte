@@ -19,20 +19,20 @@
 </script>
 
 <nav class="navbar mx-auto justify-between pt-4 md:px-6 xl:w-[75%]">
-	<a href="/" class="btn btn-ghost text-2xl md:flex">Spartan Compass</a>
+	<a href="/" class="text-2xl font-bold md:flex">Spartan Compass</a>
 	<!-- eslint-disable-next-line svelte/valid-compile -->
 	{#if $page.url.pathname !== '/'}
 		<Search {courses} {formData} />
 	{/if}
-	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
-		<a href="/account" class="btn btn-ghost btn-sm text-lg">My Account</a>
+	<div class="hidden menu menu-horizontal gap-x-4 lg:flex">
+		<a href="/account" class="text-lg btn btn-ghost btn-sm">My Account</a>
 		{#if user}
-			<Logout><button type="submit" class="btn btn-accent btn-sm text-lg">Log Out</button></Logout>
+			<Logout><button type="submit" class="text-lg btn btn-accent btn-sm">Log Out</button></Logout>
 		{:else if dev}
-			<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Dev Login</a>
+			<a href="/dev-login" class="text-lg btn btn-ghost btn-sm">Dev Login</a>
 		{:else}
-			<Login><button type="submit" class="btn btn-ghost btn-sm text-lg">Log In</button></Login>
-			<Login><button type="submit" class="btn btn-accent btn-sm text-lg">Sign Up</button></Login>
+			<Login><button type="submit" class="text-lg btn btn-ghost btn-sm">Log In</button></Login>
+			<Login><button type="submit" class="text-lg btn btn-accent btn-sm">Sign Up</button></Login>
 		{/if}
 	</div>
 	<div class="lg:hidden">
@@ -47,7 +47,7 @@
 				{#if user}
 					<li><Logout><button type="submit" class="text-lg">Log Out</button></Logout></li>
 				{:else if dev}
-					<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Dev Login</a>
+					<a href="/dev-login" class="text-lg btn btn-ghost btn-sm">Dev Login</a>
 				{:else}
 					<div>
 						<li>
