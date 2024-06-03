@@ -14,7 +14,7 @@
 	let { course }: { course: ExtendedCourse } = $props();
 </script>
 
-<div class="card w-full bg-base-300 shadow-xl">
+<div class="w-full shadow-xl card bg-base-300">
 	<div class="card-body">
 		<div class="flex items-center justify-between">
 			<div>
@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="ml-4">
-				<div class="mb-2 flex h-16 items-center justify-center rounded-md border-2">
+				<div class="flex items-center justify-center h-16 mb-2 border-2 rounded-md">
 					<span class="text-4xl">
 						{course.averageRating ? course.averageRating : 'N/A'}
 					</span>
@@ -33,7 +33,7 @@
 				<!-- eslint-disable -->
 				<button
 					class="btn btn-secondary btn-sm"
-					on:click={() => goto(`${$page.url.pathname}/${course.subject}-${course.courseNumber}`)}
+					onclick={() => goto(`${$page.url.pathname}/${course.subject}-${course.courseNumber}`)}
 				>
 					Reviews
 				</button>
