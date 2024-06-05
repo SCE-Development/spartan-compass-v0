@@ -35,24 +35,38 @@
 		}
 	}
 
-	function selectProfessor(professor: Professor) {
-		$form.profName = professor.name;
-		suggestions = [];
-	}
 
-	function handleSubmit(event: KeyboardEvent) {
-		if (event.key === 'Enter') {
-			const inputValue = $form.profName.trim();
-			if (inputValue.length > 0) {
-				const split = inputValue.replace(' ', '-');
-				goto(`./professors/${split}`);
-			}
+	function handleSubmit(event: Event) {
+		//event.preventDefault();
+		let inputValue = '';
+		const inputElement = document.querySelector('input[list="profNames"]') as HTMLInputElement;
+		inputValue = inputElement.value.trim();
+		if (inputValue.length > 0) {
+			const split = inputValue.replace(' ', '-');
+		goto(`./professors/${split}`);
 		}
 	}
+
 </script>
 
-<form method="POST" action="" class="flex items-center space-x-4" use:enhance>
+<form method="POST" class="flex items-center space-x-4" use:enhance>
 	<input
+		type="text"
+		placeholder="Type professor name"
+		class="input input-bordered w-full max-w-xs"
+		bind:value={$form.profName}
+		list="profNames"
+		oninput={handleInput}
+		onchange={handleSubmit}
+	/>
+	<datalist id="profNames">
+		{#each suggestions as suggestion}
+			<option>{suggestion.name}</option>
+		{/each}
+	</datalist>
+</form>
+
+<!-- <input
 		type="text"
 		placeholder="Type here"
 		class="input input-bordered w-full max-w-xs"
@@ -72,5 +86,4 @@
 				{/each}
 			</ul>
 		{/if}
-	</div>
-</form>
+	</div> -->
