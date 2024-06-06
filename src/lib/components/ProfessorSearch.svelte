@@ -9,6 +9,7 @@
 	import type { ProfSearchSchema } from '$lib/forms/schema';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { goto } from '$app/navigation';
+	import SuperDebug from 'sveltekit-superforms';
 
 	interface Props {
 		professors: Professor[];
@@ -17,7 +18,7 @@
 
 	let { professors, profFormData }: Props = $props();
 
-	const { form, enhance } = superForm(profFormData, {
+	const { form } = superForm(profFormData, {
 		invalidateAll: false,
 		resetForm: false
 	});
@@ -35,55 +36,28 @@
 		}
 	}
 
-
 	function handleSubmit(event: Event) {
-		//event.preventDefault();
-		let inputValue = '';
-		const inputElement = document.querySelector('input[list="profNames"]') as HTMLInputElement;
-		inputValue = inputElement.value.trim();
-		if (inputValue.length > 0) {
-			const split = inputValue.replace(' ', '-');
-		goto(`./professors/${split}`);
-		}
+		event.preventDefault();
+		goto(`./professors/${$form.profName}`);
 	}
-
 </script>
 
-<form method="POST" class="flex items-center space-x-4" use:enhance>
+<form method="POST" class="flex items-center space-x-4" onsubmit={handleSubmit}>
 	<input
 		type="text"
 		placeholder="Type professor name"
 		class="input input-bordered w-full max-w-xs"
+		name="profName"
 		bind:value={$form.profName}
 		list="profNames"
 		oninput={handleInput}
-		onchange={handleSubmit}
 	/>
 	<datalist id="profNames">
 		{#each suggestions as suggestion}
 			<option>{suggestion.name}</option>
 		{/each}
 	</datalist>
-</form>
 
-<!-- <input
-		type="text"
-		placeholder="Type here"
-		class="input input-bordered w-full max-w-xs"
-		bind:value={$form.profName}
-		oninput={handleInput}
-		onkeydown={handleSubmit}
-	/>
-	<div>
-		{#if suggestions.length > 0}
-			<ul>
-				{#each suggestions.slice(0, 5) as suggestion}
-					<li>
-						<button type="button" onclick={() => selectProfessor(suggestion)}>
-							{suggestion.name}
-						</button>
-					</li>
-				{/each}
-			</ul>
-		{/if}
-	</div> -->
+	<button class="btn" type="submit" disabled={!$form.profName}>Search</button>
+</form>
+<SuperDebug data={$form.profName} />

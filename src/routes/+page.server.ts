@@ -1,6 +1,6 @@
 import { redirect, type Actions } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
-import { searchSchema } from '$lib/forms/schema';
+import { profSearchSchema, searchSchema } from '$lib/forms/schema';
 import { superValidate } from 'sveltekit-superforms';
 import { db } from '$lib/db/db.server';
 import { coursesTable } from '$lib/db/schema';
@@ -8,7 +8,8 @@ import { and, eq } from 'drizzle-orm';
 
 export const load = async () => {
 	const form = await superValidate(zod(searchSchema));
-	return { form };
+	const profForm = await superValidate(zod(profSearchSchema));
+	return { form, profForm };
 };
 
 export const actions: Actions = {
