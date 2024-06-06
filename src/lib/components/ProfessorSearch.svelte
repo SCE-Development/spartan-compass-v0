@@ -9,7 +9,6 @@
 	import type { ProfSearchSchema } from '$lib/forms/schema';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { goto } from '$app/navigation';
-	import SuperDebug from 'sveltekit-superforms';
 
 	interface Props {
 		professors: Professor[];
@@ -60,4 +59,3 @@
 
 	<button class="btn" type="submit" disabled={!$form.profName}>Search</button>
 </form>
-<SuperDebug data={$form.profName} />
