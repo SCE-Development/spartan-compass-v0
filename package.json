@@ -12,8 +12,8 @@
     "format": "prettier --write .",
     "db:dev": "docker-compose -f docker-compose.dev.yml up -d || docker compose -f docker-compose.dev.yml up -d",
     "db:studio": "drizzle-kit studio --config drizzle.config.ts",
-    "db:generate": "drizzle-kit generate:pg --config drizzle.config.ts",
-    "db:migrate": "drizzle-kit push:pg --config drizzle.config.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit push",
     "db:drop": "drizzle-kit drop --config drizzle.config.ts",
     "db:seed": "bun run ./src/lib/db/seed.ts"
   },
