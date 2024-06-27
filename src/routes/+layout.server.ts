@@ -14,8 +14,7 @@ export const load: PageServerLoad = async (event: RequestEvent) => {
 			id: coursesTable.id,
 			title: coursesTable.title,
 			subject: coursesTable.subject,
-			courseNumber: coursesTable.courseNumber,
-			description: coursesTable.description
+			courseNumber: coursesTable.courseNumber
 		})
 		.from(coursesTable)
 		.orderBy(asc(coursesTable.courseNumber));
