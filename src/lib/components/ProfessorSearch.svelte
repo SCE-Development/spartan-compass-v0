@@ -12,7 +12,7 @@
 
 	interface Props {
 		professors: Professor[];
-		formData: SuperValidated<Infer<ProfessorSearchSchema>>;
+		formData: SuperValidated<Infer<ProfessorSearchSchema>>; //
 	}
 
 	let { professors, formData }: Props = $props();
