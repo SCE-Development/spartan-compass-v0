@@ -17,7 +17,7 @@
 
 	let { professors, formData }: Props = $props();
 
-	const { form, enhance } = superForm(formData, {
+	const { form } = superForm(formData, {
 		invalidateAll: false,
 		resetForm: false
 	});
