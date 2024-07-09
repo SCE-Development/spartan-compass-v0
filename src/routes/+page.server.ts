@@ -8,14 +8,17 @@ import { and, eq } from 'drizzle-orm';
 
 export const load = async () => {
 	const form = await superValidate(zod(searchSchema));
+
 	return { form };
 };
 
 export const actions: Actions = {
 	search: async (request) => {
 		const form = await superValidate(request, zod(searchSchema));
+
 		const courseName = form.data.courseName;
 		const courseNum = Number(form.data.courseNumber);
+
 		const courseID = await db
 			.select({ id: coursesTable.id })
 			.from(coursesTable)
