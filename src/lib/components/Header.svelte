@@ -27,12 +27,18 @@
 	<div class="menu menu-horizontal hidden gap-x-4 lg:flex">
 		<a href="/account" class="btn btn-ghost btn-sm text-lg">My Account</a>
 		{#if user}
-			<Logout><button type="submit" class="btn btn-accent btn-sm text-lg">Log Out</button></Logout>
+			<Logout>
+				<button type="submit" class="btn btn-accent btn-sm text-lg">Log Out</button>
+			</Logout>
 		{:else if dev}
 			<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Dev Login</a>
 		{:else}
-			<Login><button type="submit" class="btn btn-ghost btn-sm text-lg">Log In</button></Login>
-			<Login><button type="submit" class="btn btn-accent btn-sm text-lg">Sign Up</button></Login>
+			<Login>
+				<button type="submit" class="btn btn-ghost btn-sm text-lg">Log In</button>
+			</Login>
+			<Login>
+				<button type="submit" class="btn btn-accent btn-sm text-lg">Sign Up</button>
+			</Login>
 		{/if}
 	</div>
 	<div class="lg:hidden">
@@ -45,16 +51,28 @@
 			>
 				<li><a href="/about" class="text-lg">About</a></li>
 				{#if user}
-					<li><Logout><button type="submit" class="text-lg">Log Out</button></Logout></li>
+					<Logout>
+						<li>
+							<button type="submit" class="text-lg">Log Out</button>
+						</li>
+					</Logout>
 				{:else if dev}
 					<a href="/dev-login" class="btn btn-ghost btn-sm text-lg">Dev Login</a>
 				{:else}
 					<div>
-						<li>
-							<Login><button type="submit" class="text-lg">Log In</button></Login>
-						</li>
+						<Login>
+							<li>
+								<button type="submit" class="text-lg">Log In</button>
+							</li>
+						</Login>
 					</div>
-					<li><a href="/login" class="text-lg">Sign Up</a></li>
+					<div>
+						<Login>
+							<li>
+								<a href="/login" class="text-lg">Sign Up</a>
+							</li>
+						</Login>
+					</div>
 				{/if}
 			</ul>
 		</div>
