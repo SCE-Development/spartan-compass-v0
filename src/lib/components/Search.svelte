@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	import { goto } from '$app/navigation';
 	export interface Course {
 		id: number;
 		title: string;
@@ -28,27 +29,36 @@
 			.filter((course) => course.subject === $form.courseName)
 			.map((course) => ({ number: course.courseNumber, title: course.title }))
 	);
+
+	function handleRedirect() {
+		const selectedCourse = courses.find(
+			(course) =>
+				course.subject === $form.courseName && course.courseNumber === Number($form.courseNumber)
+		);
+		if (selectedCourse) {
+			goto(`/course/${selectedCourse.id}`);
+		}
+	}
+
 </script>
 
-<form method="POST" action="/?/search" class="flex items-center space-x-4" use:enhance>
-	<select name="courseName" bind:value={$form.courseName} class="select">
-		<option value="">Select a subject</option>
-		{#each [...new Set(courses.map((course) => course.subject))] as subject}
-			<option value={subject}>{subject}</option>
-		{/each}
-	</select>
+<select name="courseName" bind:value={$form.courseName} class="select">
+	<option value="">Select a subject</option>
+	{#each [...new Set(courses.map((course) => course.subject))] as subject}
+		<option value={subject}>{subject}</option>
+	{/each}
+</select>
 
-	<select
-		name="courseNumber"
-		bind:value={$form.courseNumber}
-		class="select"
-		disabled={!$form.courseName}
-	>
-		<option value="">Select a course number</option>
-		{#each courseNumbers as { number, title }}
-			<option value={number}>{number} - {title}</option>
-		{/each}
-	</select>
+<select
+	name="courseNumber"
+	bind:value={$form.courseNumber}
+	class="select"
+	disabled={!$form.courseName}
+>
+	<option value="">Select a course number</option>
+	{#each courseNumbers as { number, title }}
+		<option value={number}>{number} - {title}</option>
+	{/each}
+</select>
 
-	<button class="btn" type="submit" disabled={!$form.courseNumber}>Search</button>
-</form>
+<button class="btn" type="submit" disabled={!$form.courseNumber} onclick={handleRedirect}>Search</button>
