@@ -37,8 +37,8 @@
 		);
 		if (selectedCourse) {
 			goto(`/course/${selectedCourse.id}`);
-		}
-	}
+		};
+	};
 
 </script>
 
