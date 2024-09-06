@@ -11,3 +11,4 @@ vite.config.ts.timestamp-*
 data
 package-lock.json
 pnpm-lock.yaml
+__pycache__/
